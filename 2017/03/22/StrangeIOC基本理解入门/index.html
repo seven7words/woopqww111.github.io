@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Seven_words的博客</title>
+  <title>StrangeIOC的入门级使用理解 | Seven_words的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
 ##首先我觉得应该先官方解释明白两个重要概念
@@ -11,7 +11,7 @@
 控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。
 IoC是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Seven_words的博客">
+<meta property="og:title" content="StrangeIOC的入门级使用理解">
 <meta property="og:url" content="http://yoursite.com/2017/03/22/StrangeIOC基本理解入门/index.html">
 <meta property="og:site_name" content="Seven_words的博客">
 <meta property="og:description" content="StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
@@ -19,16 +19,16 @@ IoC是">
 
 控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。
 IoC是">
-<meta property="og:image" content="http://yoursite.com/StrangeIOC基本理解入门/1.png">
-<meta property="og:updated_time" content="2017-03-22T15:26:05.000Z">
+<meta property="og:image" content="http://yoursite.com/2017/03/22/StrangeIOC基本理解入门/1.png">
+<meta property="og:updated_time" content="2017-03-22T15:43:39.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Seven_words的博客">
+<meta name="twitter:title" content="StrangeIOC的入门级使用理解">
 <meta name="twitter:description" content="StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
 ##首先我觉得应该先官方解释明白两个重要概念
 
 控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。
 IoC是">
-<meta name="twitter:image" content="http://yoursite.com/StrangeIOC基本理解入门/1.png">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/22/StrangeIOC基本理解入门/1.png">
   
     <link rel="alternate" href="/atom.xml" title="Seven_words的博客" type="application/atom+xml">
   
@@ -80,12 +80,22 @@ IoC是">
         <section id="main"><article id="post-StrangeIOC基本理解入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/22/StrangeIOC基本理解入门/" class="article-date">
-  <time datetime="2017-03-22T14:53:48.000Z" itemprop="datePublished">2017-03-22</time>
+  <time datetime="2017-03-22T15:43:29.000Z" itemprop="datePublished">2017-03-22</time>
 </a>
     
   </div>
   <div class="article-inner">
     
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      StrangeIOC的入门级使用理解
+    </h1>
+  
+
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -99,7 +109,7 @@ IoC是">
 <p>依赖注入的基本原则是：应用组件不应该负责查找资源或者其他依赖的协作对象。配置对象的工作应该由IoC容器负责，“查找资源”的逻辑应该从应用组件的代码中抽取出来，交给IoC容器负责。</p>
 </blockquote>
 <p><a href="http://zhangjunhd.blog.51cto.com/113473/126530/" target="_blank" rel="external"><br>这个是官方解释。来自于，别人的博客。</a></p>
-<p>套用学习的老师所说的话，最重要的资料通通来自官网，于是我觉得最核心的就是看下面的这张图了。<br><img src="StrangeIOC基本理解入门/1.png" alt="1"></p>
+<p>套用学习的老师所说的话，最重要的资料通通来自官网，于是我觉得最核心的就是看下面的这张图了。<br><img src="/2017/03/22/StrangeIOC基本理解入门/1.png" alt="1"></p>
 <h2 id="我根据使用的流程来解释这张图的各个部分，全凭记忆"><a href="#我根据使用的流程来解释这张图的各个部分，全凭记忆" class="headerlink" title="我根据使用的流程来解释这张图的各个部分，全凭记忆"></a>我根据使用的流程来解释这张图的各个部分，全凭记忆</h2><h3 id="1-ROOT（contextView）"><a href="#1-ROOT（contextView）" class="headerlink" title="1.ROOT（contextView）"></a>1.ROOT（contextView）</h3><p>root是进入这个框架的核心类，一切都是从这个调用出来的，一般来说会挂在一个unity3D的物体上，具体怎么挂载，全凭自由。</p>
 <pre><code>using UnityEngine;
 using System.Collections;
@@ -378,7 +388,7 @@ public void UpdateScore(string url, int score)
       <ul>
         
           <li>
-            <a href="/2017/03/22/StrangeIOC基本理解入门/">(no title)</a>
+            <a href="/2017/03/22/StrangeIOC基本理解入门/">StrangeIOC的入门级使用理解</a>
           </li>
         
           <li>

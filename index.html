@@ -67,12 +67,22 @@
     <article id="post-StrangeIOC基本理解入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/22/StrangeIOC基本理解入门/" class="article-date">
-  <time datetime="2017-03-22T14:53:48.000Z" itemprop="datePublished">2017-03-22</time>
+  <time datetime="2017-03-22T15:43:29.000Z" itemprop="datePublished">2017-03-22</time>
 </a>
     
   </div>
   <div class="article-inner">
     
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/22/StrangeIOC基本理解入门/">StrangeIOC的入门级使用理解</a>
+    </h1>
+  
+
+      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
@@ -86,7 +96,7 @@
 <p>依赖注入的基本原则是：应用组件不应该负责查找资源或者其他依赖的协作对象。配置对象的工作应该由IoC容器负责，“查找资源”的逻辑应该从应用组件的代码中抽取出来，交给IoC容器负责。</p>
 </blockquote>
 <p><a href="http://zhangjunhd.blog.51cto.com/113473/126530/" target="_blank" rel="external"><br>这个是官方解释。来自于，别人的博客。</a></p>
-<p>套用学习的老师所说的话，最重要的资料通通来自官网，于是我觉得最核心的就是看下面的这张图了。<br><img src="StrangeIOC基本理解入门/1.png" alt="1"></p>
+<p>套用学习的老师所说的话，最重要的资料通通来自官网，于是我觉得最核心的就是看下面的这张图了。<br><img src="/2017/03/22/StrangeIOC基本理解入门/1.png" alt="1"></p>
 <h2 id="我根据使用的流程来解释这张图的各个部分，全凭记忆"><a href="#我根据使用的流程来解释这张图的各个部分，全凭记忆" class="headerlink" title="我根据使用的流程来解释这张图的各个部分，全凭记忆"></a>我根据使用的流程来解释这张图的各个部分，全凭记忆</h2><h3 id="1-ROOT（contextView）"><a href="#1-ROOT（contextView）" class="headerlink" title="1.ROOT（contextView）"></a>1.ROOT（contextView）</h3><p>root是进入这个框架的核心类，一切都是从这个调用出来的，一般来说会挂在一个unity3D的物体上，具体怎么挂载，全凭自由。</p>
 <pre><code>using UnityEngine;
 using System.Collections;
@@ -497,7 +507,7 @@ pod update --verbose --no-repo-update
       <ul>
         
           <li>
-            <a href="/2017/03/22/StrangeIOC基本理解入门/">(no title)</a>
+            <a href="/2017/03/22/StrangeIOC基本理解入门/">StrangeIOC的入门级使用理解</a>
           </li>
         
           <li>
