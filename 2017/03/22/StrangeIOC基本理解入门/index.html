@@ -5,15 +5,30 @@
   
   <title>Seven_words的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
+  <meta name="description" content="#StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
+##首先我觉得应该先官方解释明白两个重要概念
+
+控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。
+IoC">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Seven_words的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/2017/03/22/StrangeIOC基本理解入门/index.html">
 <meta property="og:site_name" content="Seven_words的博客">
-<meta property="og:description">
+<meta property="og:description" content="#StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
+##首先我觉得应该先官方解释明白两个重要概念
+
+控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。
+IoC">
+<meta property="og:image" content="http://yoursite.com/Users/sevenqizai/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/302819242/QQ/Temp.db/FEE831A2-9207-433E-833E-719643FB1E4B.png">
+<meta property="og:updated_time" content="2017-03-22T14:57:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Seven_words的博客">
-<meta name="twitter:description">
+<meta name="twitter:description" content="#StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
+##首先我觉得应该先官方解释明白两个重要概念
+
+控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。
+IoC">
+<meta name="twitter:image" content="http://yoursite.com/Users/sevenqizai/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/302819242/QQ/Temp.db/FEE831A2-9207-433E-833E-719643FB1E4B.png">
   
     <link rel="alternate" href="/atom.xml" title="Seven_words的博客" type="application/atom+xml">
   
@@ -62,9 +77,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-StrangeIOC基本理解入门" class="article article-type-post" itemscope itemprop="blogPost">
+        <section id="main"><article id="post-StrangeIOC基本理解入门" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/03/22/StrangeIOC基本理解入门/" class="article-date">
   <time datetime="2017-03-22T14:53:48.000Z" itemprop="datePublished">2017-03-22</time>
@@ -322,151 +335,19 @@ public void UpdateScore(string url, int score)
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-CocoaPods综合策略" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/07/CocoaPods综合策略/" class="article-date">
-  <time datetime="2016-04-07T04:31:29.000Z" itemprop="datePublished">2016-04-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/07/CocoaPods综合策略/">CocoaPods综合策略</a>
-    </h1>
+    <a href="/2016/04/07/CocoaPods综合策略/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CocoaPods综合策略</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#CocoaPods 总结</p>
-<p>##CocoaPods简介<br>简单说：就是一个第三方管理库，当你已经来到这步的时候，我相信你已经有一定经验并且稍微懂得第三方库了。（我扒的唐巧大神的格式，以及添加了一些自己的经验之谈（当初淌过的坑都是脑子当年进得水））</p>
-<blockquote>
-<p>##CocoaPods的安装和使用介绍</p>
-<p>###安装（扒的巧大神。sorry）<br>安装方式异常简单 , Mac 下都自带 ruby，使用 ruby 的 gem 命令即可下载安装：</p>
-<pre><code>1.$ sudo gem install cocoapods
-2.$ pod setup 
-</code></pre><p>如果你的 gem 太老，可能也会有问题，可以尝试用如下命令升级 gem:</p>
-<pre><code>sudo gem update --system
-</code></pre><p>另外，ruby 的软件源 <a href="https://rubygems.org" target="_blank" rel="external">https://rubygems.org</a> 因为使用的是亚马逊的云服务，所以被墙了，需要更新一下 ruby 的源，使用如下代码将官方的 ruby 源替换成国内淘宝的源</p>
-<pre><code> gem sources --remove https://rubygems.org/
-gem sources -a http://ruby.taobao.org/
-gem sources -l
-</code></pre><p>还有一点需要注意，<code>pod setup</code>在执行时，会输出<code>Setting up CocoaPods master repo</code>，但是会等待比较久的时间。这步其实是 Cocoapods 在将它的信息下载到 <code>~/.cocoapods目录下</code>，如果你等太久，可以试着 <code>cd</code> 到那个目录，用<code>du -sh *</code>来查看下载进度。你也可以参考本文接下来的使用 cocoapods 的镜像索引一节的内容来提高下载速度。</p>
-<p>##使用CocoaPods的镜像索引<br>所有的项目的 Podspec 文件都托管在<code>https://github.com/CocoaPods/Specs</code>。第一次执行<code>pod setup</code>时，CocoaPods 会将这些podspec索引文件更新到本地的<code>~/.cocoapods/</code>目录下，这个索引文件比较大，有 80M 左右。所以第一次更新时非常慢，笔者就更新了将近 1 个小时才完成。</p>
-<p>一个叫 akinliu 的朋友在 gitcafe 和 oschina 上建立了 CocoaPods 索引库的镜像，因为 gitcafe 和 oschina 都是国内的服务器，所以在执行索引更新操作时，会快很多。如下操作可以将 CocoaPods 设置成使用 gitcafe 镜像：</p>
-<pre><code>pod repo remove master
-pod repo add master https://gitcafe.com/akuandev/Specs.git
-pod repo update
-</code></pre><p>将以上代码中的 <code>https://gitcafe.com/akuandev/Specs.git</code> 替换成 <code>http://git.oschina.net/akuandev/Specs.git</code> 即可使用 oschina 上的镜像。</p>
-<p>##使用 CocoaPods<br>使用时需要新建一个名为 Podfile 的文件，以如下格式，将依赖的库名字依次列在文件中即可</p>
-<pre><code>platform :ios ,&apos;8.0&apos;
-pod &apos;JSONKit&apos;,       &apos;~&gt; 1.4&apos;
-pod &apos;Reachability&apos;,  &apos;~&gt; 3.0.0&apos;
-pod &apos;ASIHTTPRequest&apos;
-pod &apos;RegexKitLite&apos;
-use_frameworks!
-</code></pre><p>然后你将编辑好的 Podfile 文件放到你的项目根目录中，执行如下命令即可：</p>
-<pre><code>cd &quot;your project home&quot;
-pod install
-</code></pre><p>现在，你的所有第三方库都已经下载完成并且设置好了编译参数和依赖，你只需要记住如下 2 点即可：</p>
-<p>使用 CocoaPods 生成的 .xcworkspace 文件来打开工程，而不是以前的 .xcodeproj 文件。<br>每次更改了 Podfile 文件，你需要重新执行一次pod update命令。</p>
-<p>##查找第三方库<br>你如果不知道 cocoaPods 管理的库中，是否有你想要的库，那么你可以通过 pod search 命令进行查找，以下是我用 pod search json 查找到的所有可用的库：</p>
-</blockquote>
-<p>&gt;<br>    $ pod search json<br>&gt;<br>    -&gt; AnyJSON (0.0.1)<br>    Encode / Decode JSON by any means possible.</p>
-<pre><code>- Homepage: https://github.com/mattt/AnyJSON
-- Source:   https://github.com/mattt/AnyJSON.git
-- Versions: 0.0.1 [master repo]
-</code></pre><p>&gt;<br>    -&gt; JSONKit (1.5pre)<br>    A Very High Performance Objective-C JSON Library.</p>
-<pre><code>- Homepage: https://github.com/johnezang/JSONKit
-- Source:   git://github.com/johnezang/JSONKit.git
-- Versions: 1.5pre, 1.4 [master repo]
-</code></pre><p>&gt;<br>    // … 以下省略若干行</p>
-<p>##关于 Podfile.lock</p>
-<blockquote>
-<p>当你执行pod install之后，除了 Podfile 外，CocoaPods 还会生成一个名为Podfile.lock的文件，Podfile.lock 应该加入到版本控制里面，不应该把这个文件加入到.gitignore中。因为Podfile.lock会锁定当前各依赖库的版本，之后如果多次执行pod install 不会更改版本，要pod update才会改Podfile.lock了。这样多人协作的时候，可以防止第三方库升级时造成大家各自的第三方库版本不一致。</p>
-<p>CocoaPods 的这篇 官方文档 也在What is a Podfile.lock一节中介绍了Podfile.lock的作用，并且指出：</p>
-<blockquote>
-<p>This file should always be kept under version control.</p>
-</blockquote>
-</blockquote>
-<p>##接下来是我的时间<br>小生根据网络上的教程做了个神奇的项目，因为其中的一个第三方是oc的，而我用的是swift，从此在错误中一发不可收拾，直接把我干跪。总结一下多方经验<br>1.用swift做项目，使用oc的第三方库，并且通过CocoaPods的话，不用桥接文件，重要的话说三遍，不用桥接文件。直接在你需要使用的那个文件里，直接引用就成，否则一定会疯狂报错。<br>2.我国国情原因<br>由于国内被墙，用这个 </p>
-<pre><code>pod install
-==
-/下面的等于上面那个，否则你三小时你那项目也出不来。workspace文件
-pod install --verbose --no-repo-update
-</code></pre><p>如果要更新你的第三方库的话,用这个</p>
-<pre><code>pod update
-/同理
-pod update --verbose --no-repo-update
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/04/07/CocoaPods综合策略/" data-id="cj0kyum0g0001l19owopxrp4i" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/07/hello-world/" class="article-date">
-  <time datetime="2016-04-07T02:06:03.000Z" itemprop="datePublished">2016-04-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/07/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/04/07/hello-world/" data-id="cj0kyum0b0000l19oaezqz6qs" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 </section>
         
