@@ -1,559 +1,205 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-  <title>Seven_words的博客</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Seven_words的博客">
-<meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Seven_words的博客">
-<meta property="og:description">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Seven_words的博客">
-<meta name="twitter:description">
-  
-    <link rel="alternate" href="/atom.xml" title="Seven_words的博客" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
 
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Seven_words的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Seven_words/woopqww111">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Seven_words的博客</a>
-      </h1>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Seven_words的博客" title="Seven_words的博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Seven_words的博客">Seven_words的博客</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main">
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2017/03/22/StrangeIOC基本理解入门/" title="StrangeIOC的入门级使用理解" itemprop="url">
+  
+    <h1 itemprop="name">StrangeIOC的入门级使用理解</h1>
+    
+     
+           <p itemprop="description" >StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
+##首先我觉得应该先官方解释明白两个重要概念
+
+控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器</p>
         
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-StrangeIOC基本理解入门" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/22/StrangeIOC基本理解入门/" class="article-date">
-  <time datetime="2017-03-22T15:43:29.000Z" itemprop="datePublished">2017-03-22</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/22/StrangeIOC基本理解入门/">StrangeIOC的入门级使用理解</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="StrangeIOC的入门级使用理解"><a href="#StrangeIOC的入门级使用理解" class="headerlink" title="StrangeIOC的入门级使用理解"></a>StrangeIOC的入门级使用理解</h1><p>最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。</p>
-<p>##首先我觉得应该先官方解释明白两个重要概念</p>
-<blockquote>
-<p>控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。</p>
-<p>IoC是一个很大的概念，可以用不同的方式来实现。其主要实现方式有两种：<1>依赖查找（Dependency Lookup）：容器提供回调接口和上下文环境给组件。</1></p>
-<p><2>依赖注入（Dependency Injection）：组件不做定位查询，只提供普通的Java方法让容器去决定依赖关系。后者是时下最流行的IoC类型，其又有接口注入（Interface Injection），设值注入（Setter Injection）和构造子注入（Constructor Injection）三种方式。</2></p>
-<p>依赖注入之所以更流行是因为它是一种更可取的方式：让容器全权负责依赖查询，受管组件只需要暴露JavaBean的setter方法或者带参数的构造子或者接口，使容器可以在初始化时组装对象的依赖关系。其与依赖查找方式相比，主要优势为：<1>查找定位操作与应用代码完全无关。<2>不依赖于容器的API，可以很容易地在任何容器以外使用应用对象。<3>不需要特殊的接口，绝大多数对象可以做到完全不必依赖容器。</3></2></1></p>
-<p>依赖注入的基本原则是：应用组件不应该负责查找资源或者其他依赖的协作对象。配置对象的工作应该由IoC容器负责，“查找资源”的逻辑应该从应用组件的代码中抽取出来，交给IoC容器负责。</p>
-</blockquote>
-<p><a href="http://zhangjunhd.blog.51cto.com/113473/126530/" target="_blank" rel="external"><br>这个是官方解释。来自于，别人的博客。</a></p>
-<p>套用学习的老师所说的话，最重要的资料通通来自官网，于是我觉得最核心的就是看下面的这张图了。<br><img src="/2017/03/22/StrangeIOC基本理解入门/1.png" alt="1"></p>
-<h2 id="我根据使用的流程来解释这张图的各个部分，全凭记忆"><a href="#我根据使用的流程来解释这张图的各个部分，全凭记忆" class="headerlink" title="我根据使用的流程来解释这张图的各个部分，全凭记忆"></a>我根据使用的流程来解释这张图的各个部分，全凭记忆</h2><h3 id="1-ROOT（contextView）"><a href="#1-ROOT（contextView）" class="headerlink" title="1.ROOT（contextView）"></a>1.ROOT（contextView）</h3><p>root是进入这个框架的核心类，一切都是从这个调用出来的，一般来说会挂在一个unity3D的物体上，具体怎么挂载，全凭自由。</p>
-<pre><code>using UnityEngine;
-using System.Collections;
-using strange.extensions.context.impl;
-public class Demo1ContextView : ContextView {
-void Awake()
-    {
-        this.context = new Demo1MVCSContext(this);
-
-   // context.Start();
-
-}
-}
-</code></pre><p>这个脚本继承于ContextView。用来激活继承MVCSContext的类函数。</p>
-<h3 id="2-MVCSContext"><a href="#2-MVCSContext" class="headerlink" title="2.MVCSContext"></a>2.MVCSContext</h3><p>从图中可以看出，你应该使用一个脚本继承于MVCSContext的函数，用来绑定command，mediator，services，model，dispatcher等事件。</p>
-<pre><code>using UnityEngine;
-using System.Collections;
-using strange.extensions.context.api;
-using strange.extensions.context.impl;
-using strange.extensions.mediation.impl;
-
-public class Demo1MVCSContext : MVCSContext {
-
-public Demo1MVCSContext(MonoBehaviour view) : base(view)
-    {
-}
-
-protected override void mapBindings()//进行绑定映射
-{
-
-  //model
-    injectionBinder.Bind&lt;ScoreModel&gt;().To&lt;ScoreModel&gt;().ToSingleton();
-  //service
-    injectionBinder.Bind&lt;IScoreService&gt;().To&lt;ScoreService&gt;().ToSingleton();//只在整个工程中生成一个
-  //command
-    commandBinder.Bind(Demo1CommandEvent.RequestScore).To&lt;RequestScoreCommand&gt;();
-    commandBinder.Bind(Demo1CommandEvent.UpdateScore).To&lt;UpdateScoreCommand&gt;();
-  //mediator(view)
-    mediationBinder.Bind&lt;CubeView&gt;().To&lt;CubeMediator&gt;();//完成mediator和view的绑定
-
-
-    //绑定开始事件一个startcommand(只绑定一次，再触发就解绑了)
-    commandBinder.Bind(ContextEvent.START).To&lt;StartCommand&gt;().Once();
-
-}
-
-}
-</code></pre><h3 id="由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）"><a href="#由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）" class="headerlink" title="由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）"></a>由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）</h3><h4 id="首先应该是事件模型"><a href="#首先应该是事件模型" class="headerlink" title="首先应该是事件模型"></a>首先应该是事件模型</h4><pre><code>using UnityEngine;
-using System.Collections;
-
-//不需要继承任何类
-
-public class ScoreModel{
-//不需要继承任何类
-public int Score { get; set; }
-
-}
-</code></pre><p>然后，我们应该从模型中得到数据在界面中进行更改。但是由于strangeIOC的思想理念是将UI里的表现的组件类（View），和实现的逻辑类进行分离（Mediator）所以，代码如下（View）</p>
-<pre><code>using UnityEngine;
-using System.Collections;
-using strange.extensions.dispatcher.eventdispatcher.api;
-using strange.extensions.mediation.impl;
-using UnityEngine.UI;
-
-public class CubeView : View
-{[Inject]
-public IEventDispatcher dispatcher { get; set; }
-
-private Text scoreText;
-//慎用start和awake。不能覆盖掉父类的方法
-/// &lt;summary&gt;
-/// 做初始化mediator
-/// &lt;/summary&gt;
-public void Init()
-{
-    scoreText = GetComponentInChildren&lt;Text&gt;();
-}
-
-void Update()
-{
-    transform.Translate( new Vector3(Random.Range(-1, 2), Random.Range(-1, 2), Random.Range(-1, 2))*0.2f);
-}
-
-void OnMouseDown()
-{
-    //加分
-    Debug.Log(&quot;OnMouseDown&quot;);
-    dispatcher.Dispatch(Demo1MediatorEvent.ClickDown);
-}
-
-public void UpdateScore(int score)
-{
-    scoreText.text = score.ToString();
-}
-}
-</code></pre><p>只是中间加了一个dispatcher来将点击事件发送给Mediator类中。</p>
-<p>（Mediator）</p>
-<pre><code>using UnityEngine;
-using System.Collections;
-using strange.extensions.context.api;
-using strange.extensions.dispatcher.eventdispatcher.api;
-using strange.extensions.mediation.impl;
-
-public class CubeMediator : Mediator
-{
-[Inject ]
-public CubeView cubeView { get; set; }
-[Inject(ContextKeys.CONTEXT_DISPATCHER)]
-public IEventDispatcher dispatcher { get; set; }
-   // [Inject]不推荐
-   // public ScoreModel scoreModel { get; set; }
-        public override void OnRegister()
-    {
-           Debug.Log(cubeView);
-    cubeView.Init();
-    dispatcher.AddListener(Demo1MediatorEvent.ScoreChange,OnScoreChange);
-    cubeView.dispatcher.AddListener(Demo1MediatorEvent.ClickDown,OnClickDown);
-    //通过dispatcher发起请求分数的命令
-    dispatcher.Dispatch(Demo1CommandEvent.RequestScore);
-}
-
-public override void OnRemove()
-{
-
-    dispatcher.RemoveListener(Demo1MediatorEvent.ScoreChange,OnScoreChange);
-    dispatcher.RemoveListener(Demo1MediatorEvent.ClickDown,OnClickDown);
-}
-
-public void OnScoreChange(IEvent evt)
-{
-   // cubeView.UpdateScore(scoreModel.Score);
-   cubeView.UpdateScore((int)evt.data);
-
-}
-
-public void OnClickDown()
-{
-    dispatcher.Dispatch(Demo1CommandEvent.UpdateScore);
-    Debug.Log(&quot;OnClickDown&quot;);
-}
-</code></pre><p>}<br>首先Mediator的这个类里面主要是两块功能，其中一个是改变数字，另外一个是随着点击更新数字。<br>所以首先这个类先监听了关于改变分数的类，然后向Controller里面的RequestCommand类中请求分数<br>而这个类，根据cubeView中的dispatcher监听OnClickDown的点击事件（点击事件里也是请求更新分数）</p>
-<h4 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h4><p>参数类</p>
-<pre><code>using UnityEngine;
-using System.Collections;
-
-public enum Demo1CommandEvent  {
-
-RequestScore,
-UpdateScore
-}
-</code></pre><p>请求分数类</p>
-<pre><code>using UnityEngine;
-</code></pre><p>using System.Collections;<br>using strange.extensions.command.impl;<br>using strange.extensions.context.api;<br>using strange.extensions.dispatcher.eventdispatcher.api;<br>using UnityEngine.UI;</p>
-<p>public class RequestScoreCommand : EventCommand<br>{<br>    [Inject]<br>    public IScoreService scoreService { get; set; }<br>    [Inject]<br>    public ScoreModel scoreModel { get; set; }<br>    public override void Execute()<br>    {<br>        //让这个对象不销毁<br>        Retain();<br>  scoreService.dispatcher.AddListener(Demo1ServiceEvent.RequestScore,OnComplete);<br>        Debug.Log(“requestscoreCommand”);<br>        scoreService.RequestScore(“<a href="http://xxx/xxx//xxx" target="_blank" rel="external">http://xxx/xxx//xxx</a>“);<br>    }</p>
-<pre><code>private void OnComplete(IEvent evt)//IEvent存储的就是参数
-{
- Debug.Log(&quot;requestScore OnComplete&quot;+evt.data);
-    scoreService.dispatcher.RemoveListener(Demo1ServiceEvent.RequestScore,OnComplete);
-    scoreModel.Score = (int)evt.data;
-    dispatcher.Dispatch(Demo1MediatorEvent.ScoreChange,evt.data);
-    Release();
-}
-</code></pre><p>}<br>这个则是用dispatcher向服务器请求分数并且请求更新分数完成时把分数传回给Mediator类。<br>更新分数类</p>
-<pre><code>using UnityEngine;
-</code></pre><p>using System.Collections;<br>using strange.extensions.command.impl;</p>
-<p>public class UpdateScoreCommand : EventCommand {<br>    [Inject]<br>    public ScoreModel scoreModel { get; set; }<br>    [Inject]<br>    public IScoreService scoreService { get; set; }<br>    public override void Execute()<br>    {</p>
-<pre><code>    scoreModel.Score++;
-    scoreService.UpdateScore(&quot;dfdsfdfd&quot;,scoreModel.Score);
-    dispatcher.Dispatch(Demo1MediatorEvent.ScoreChange,scoreModel.Score);
-
-}
-</code></pre><p>}</p>
-<h4 id="服务器（模仿服务器而已）"><a href="#服务器（模仿服务器而已）" class="headerlink" title="服务器（模仿服务器而已）"></a>服务器（模仿服务器而已）</h4><p>我使用了一个接口，一个用来绑定的枚举类的事件参数，一个实现了接口的类<br>（接口）</p>
-<pre><code>using UnityEngine;
-using System.Collections;
-using strange.extensions.dispatcher.eventdispatcher.api;
-
-public interface IScoreService
-{
-
-void RequestScore(string url);//请求分数
-void OnrecieveScore();//收到服务器端发送过来的分数
-void UpdateScore(string url, int score);
-IEventDispatcher dispatcher { get; set; }
-
-}
-</code></pre><p>（参数）</p>
-<pre><code>using UnityEngine;
-using System.Collections;
-
-public enum Demo1ServiceEvent  {
-RequestScore,
-
-}
-</code></pre><p>（实现接口的类）</p>
-<pre><code>using UnityEngine;
-using System.Collections;
-using strange.extensions.dispatcher.eventdispatcher.api;
-using System;
-
-public class ScoreService : IScoreService {
-[Inject]
-public IEventDispatcher dispatcher { get; set; }
-
-public void RequestScore(string url)
-{
-    Debug.Log(&quot;RequestScore from url&quot;+url);
-    OnrecieveScore();
-}
-
-public void OnrecieveScore()
-{
-    int score = UnityEngine.Random.Range(0, 100);
-    dispatcher.Dispatch(Demo1ServiceEvent.RequestScore,score);
-
-    Debug.Log(&quot;OnrecieveScore&quot;);
-}
-
-public void UpdateScore(string url, int score)
-{
-    Debug.Log(&quot;updatescore to url&quot;+url+&quot;newscore&quot;+score);
-}
-}
-</code></pre><p>这个则是，服务器收到了请求并且更新了分数把给了requestScore。</p>
-<h3 id="感觉自己讲的乱乱的，实际上逻辑是"><a href="#感觉自己讲的乱乱的，实际上逻辑是" class="headerlink" title="感觉自己讲的乱乱的，实际上逻辑是"></a>感觉自己讲的乱乱的，实际上逻辑是</h3><p>创建模型-&gt;创建View-&gt;创建Mediator-&gt;根据前面想要做的事情，由command去向-&gt;服务器请求数据-&gt;服务器得到无数-&gt;传回相应的Command，Command进行模型的更改-&gt;再去Mediator进行更改-&gt;再去将View进行更改。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/22/StrangeIOC基本理解入门/" data-id="cj0l47sje0001yu9oyhcctydk" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-CocoaPods综合策略" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/07/CocoaPods综合策略/" class="article-date">
-  <time datetime="2016-04-07T04:31:29.000Z" itemprop="datePublished">2016-04-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/07/CocoaPods综合策略/">CocoaPods综合策略</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#CocoaPods 总结</p>
-<p>##CocoaPods简介<br>简单说：就是一个第三方管理库，当你已经来到这步的时候，我相信你已经有一定经验并且稍微懂得第三方库了。（我扒的唐巧大神的格式，以及添加了一些自己的经验之谈（当初淌过的坑都是脑子当年进得水））</p>
-<blockquote>
-<p>##CocoaPods的安装和使用介绍</p>
-<p>###安装（扒的巧大神。sorry）<br>安装方式异常简单 , Mac 下都自带 ruby，使用 ruby 的 gem 命令即可下载安装：</p>
-<pre><code>1.$ sudo gem install cocoapods
-2.$ pod setup 
-</code></pre><p>如果你的 gem 太老，可能也会有问题，可以尝试用如下命令升级 gem:</p>
-<pre><code>sudo gem update --system
-</code></pre><p>另外，ruby 的软件源 <a href="https://rubygems.org" target="_blank" rel="external">https://rubygems.org</a> 因为使用的是亚马逊的云服务，所以被墙了，需要更新一下 ruby 的源，使用如下代码将官方的 ruby 源替换成国内淘宝的源</p>
-<pre><code> gem sources --remove https://rubygems.org/
-gem sources -a http://ruby.taobao.org/
-gem sources -l
-</code></pre><p>还有一点需要注意，<code>pod setup</code>在执行时，会输出<code>Setting up CocoaPods master repo</code>，但是会等待比较久的时间。这步其实是 Cocoapods 在将它的信息下载到 <code>~/.cocoapods目录下</code>，如果你等太久，可以试着 <code>cd</code> 到那个目录，用<code>du -sh *</code>来查看下载进度。你也可以参考本文接下来的使用 cocoapods 的镜像索引一节的内容来提高下载速度。</p>
-<p>##使用CocoaPods的镜像索引<br>所有的项目的 Podspec 文件都托管在<code>https://github.com/CocoaPods/Specs</code>。第一次执行<code>pod setup</code>时，CocoaPods 会将这些podspec索引文件更新到本地的<code>~/.cocoapods/</code>目录下，这个索引文件比较大，有 80M 左右。所以第一次更新时非常慢，笔者就更新了将近 1 个小时才完成。</p>
-<p>一个叫 akinliu 的朋友在 gitcafe 和 oschina 上建立了 CocoaPods 索引库的镜像，因为 gitcafe 和 oschina 都是国内的服务器，所以在执行索引更新操作时，会快很多。如下操作可以将 CocoaPods 设置成使用 gitcafe 镜像：</p>
-<pre><code>pod repo remove master
-pod repo add master https://gitcafe.com/akuandev/Specs.git
-pod repo update
-</code></pre><p>将以上代码中的 <code>https://gitcafe.com/akuandev/Specs.git</code> 替换成 <code>http://git.oschina.net/akuandev/Specs.git</code> 即可使用 oschina 上的镜像。</p>
-<p>##使用 CocoaPods<br>使用时需要新建一个名为 Podfile 的文件，以如下格式，将依赖的库名字依次列在文件中即可</p>
-<pre><code>platform :ios ,&apos;8.0&apos;
-pod &apos;JSONKit&apos;,       &apos;~&gt; 1.4&apos;
-pod &apos;Reachability&apos;,  &apos;~&gt; 3.0.0&apos;
-pod &apos;ASIHTTPRequest&apos;
-pod &apos;RegexKitLite&apos;
-use_frameworks!
-</code></pre><p>然后你将编辑好的 Podfile 文件放到你的项目根目录中，执行如下命令即可：</p>
-<pre><code>cd &quot;your project home&quot;
-pod install
-</code></pre><p>现在，你的所有第三方库都已经下载完成并且设置好了编译参数和依赖，你只需要记住如下 2 点即可：</p>
-<p>使用 CocoaPods 生成的 .xcworkspace 文件来打开工程，而不是以前的 .xcodeproj 文件。<br>每次更改了 Podfile 文件，你需要重新执行一次pod update命令。</p>
-<p>##查找第三方库<br>你如果不知道 cocoaPods 管理的库中，是否有你想要的库，那么你可以通过 pod search 命令进行查找，以下是我用 pod search json 查找到的所有可用的库：</p>
-</blockquote>
-<p>&gt;<br>    $ pod search json<br>&gt;<br>    -&gt; AnyJSON (0.0.1)<br>    Encode / Decode JSON by any means possible.</p>
-<pre><code>- Homepage: https://github.com/mattt/AnyJSON
-- Source:   https://github.com/mattt/AnyJSON.git
-- Versions: 0.0.1 [master repo]
-</code></pre><p>&gt;<br>    -&gt; JSONKit (1.5pre)<br>    A Very High Performance Objective-C JSON Library.</p>
-<pre><code>- Homepage: https://github.com/johnezang/JSONKit
-- Source:   git://github.com/johnezang/JSONKit.git
-- Versions: 1.5pre, 1.4 [master repo]
-</code></pre><p>&gt;<br>    // … 以下省略若干行</p>
-<p>##关于 Podfile.lock</p>
-<blockquote>
-<p>当你执行pod install之后，除了 Podfile 外，CocoaPods 还会生成一个名为Podfile.lock的文件，Podfile.lock 应该加入到版本控制里面，不应该把这个文件加入到.gitignore中。因为Podfile.lock会锁定当前各依赖库的版本，之后如果多次执行pod install 不会更改版本，要pod update才会改Podfile.lock了。这样多人协作的时候，可以防止第三方库升级时造成大家各自的第三方库版本不一致。</p>
-<p>CocoaPods 的这篇 官方文档 也在What is a Podfile.lock一节中介绍了Podfile.lock的作用，并且指出：</p>
-<blockquote>
-<p>This file should always be kept under version control.</p>
-</blockquote>
-</blockquote>
-<p>##接下来是我的时间<br>小生根据网络上的教程做了个神奇的项目，因为其中的一个第三方是oc的，而我用的是swift，从此在错误中一发不可收拾，直接把我干跪。总结一下多方经验<br>1.用swift做项目，使用oc的第三方库，并且通过CocoaPods的话，不用桥接文件，重要的话说三遍，不用桥接文件。直接在你需要使用的那个文件里，直接引用就成，否则一定会疯狂报错。<br>2.我国国情原因<br>由于国内被墙，用这个 </p>
-<pre><code>pod install
-==
-/下面的等于上面那个，否则你三小时你那项目也出不来。workspace文件
-pod install --verbose --no-repo-update
-</code></pre><p>如果要更新你的第三方库的话,用这个</p>
-<pre><code>pod update
-/同理
-pod update --verbose --no-repo-update
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/04/07/CocoaPods综合策略/" data-id="cj0l47sj90000yu9o3ti1x225" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/07/hello-world/" class="article-date">
-  <time datetime="2016-04-07T02:06:03.000Z" itemprop="datePublished">2016-04-07</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/07/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/04/07/hello-world/" data-id="cj0l47sjh0002yu9om1jot2a0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-
+    <time datetime="2017-03-22T15:43:29.000Z" itemprop="datePublished">2017-03-22</time>
+  </a>
 </section>
-        
-          <aside id="sidebar">
+
+  <section class="post" itemscope itemprop="blogPost">
   
+    <a href="/2016/04/07/CocoaPods综合策略/" title="CocoaPods综合策略" itemprop="url">
+  
+    <h1 itemprop="name">CocoaPods综合策略</h1>
     
+     
+           <p itemprop="description" >#CocoaPods 总结
+##CocoaPods简介简单说：就是一个第三方管理库，当你已经来到这步的时候，我相信你已经有一定经验并且稍微懂得第三方库了。（我扒的唐巧大神的格式，以及添加了一些自己的经验之谈（当初淌过的坑都是脑子当年进得水））
+
+##CocoaPods的安装和使用</p>
+        
+    
+    <time datetime="2016-04-07T04:31:29.000Z" itemprop="datePublished">2016-04-07</time>
+  </a>
+</section>
+
+  <section class="post" itemscope itemprop="blogPost">
+  
+    <a href="/2016/04/07/hello-world/" title="Hello World" itemprop="url">
+  
+    <h1 itemprop="name">Hello World</h1>
+    
+     
+           <p itemprop="description" >Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the </p>
+        
+    
+    <time datetime="2016-04-07T02:06:03.000Z" itemprop="datePublished">2016-04-07</time>
+  </a>
+</section>
+
+
+</div>
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
 
   
-    
 
   
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">March 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">April 2016</a></li></ul>
-    </div>
-  </div>
 
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2017/03/22/StrangeIOC基本理解入门/">StrangeIOC的入门级使用理解</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/07/CocoaPods综合策略/">CocoaPods综合策略</a>
-          </li>
-        
-          <li>
-            <a href="/2016/04/07/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
 </aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2017 Seven_words/woopqww111<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+</div>
     </div>
-  </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://yoursite.com" target="_blank" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
+		
+		</p>
+</div>
 </footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
 
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 
-<script src="/js/script.js"></script>
 
-  </div>
-</body>
-</html>
+
+  </body>
+ </html>
