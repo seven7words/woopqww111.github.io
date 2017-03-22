@@ -5,30 +5,30 @@
   
   <title>Seven_words的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
+  <meta name="description" content="StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
 ##首先我觉得应该先官方解释明白两个重要概念
 
 控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。
-IoC">
+IoC是">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Seven_words的博客">
 <meta property="og:url" content="http://yoursite.com/2017/03/22/StrangeIOC基本理解入门/index.html">
 <meta property="og:site_name" content="Seven_words的博客">
-<meta property="og:description" content="#StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
+<meta property="og:description" content="StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
 ##首先我觉得应该先官方解释明白两个重要概念
 
 控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。
-IoC">
-<meta property="og:image" content="http://yoursite.com/Users/sevenqizai/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/302819242/QQ/Temp.db/FEE831A2-9207-433E-833E-719643FB1E4B.png">
-<meta property="og:updated_time" content="2017-03-22T14:57:00.000Z">
+IoC是">
+<meta property="og:image" content="http://yoursite.com/StrangeIOC基本理解入门/1.png">
+<meta property="og:updated_time" content="2017-03-22T15:26:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Seven_words的博客">
-<meta name="twitter:description" content="#StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
+<meta name="twitter:description" content="StrangeIOC的入门级使用理解最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。
 ##首先我觉得应该先官方解释明白两个重要概念
 
 控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。
-IoC">
-<meta name="twitter:image" content="http://yoursite.com/Users/sevenqizai/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/302819242/QQ/Temp.db/FEE831A2-9207-433E-833E-719643FB1E4B.png">
+IoC是">
+<meta name="twitter:image" content="http://yoursite.com/StrangeIOC基本理解入门/1.png">
   
     <link rel="alternate" href="/atom.xml" title="Seven_words的博客" type="application/atom+xml">
   
@@ -89,7 +89,7 @@ IoC">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#StrangeIOC的入门级使用理解<br>最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。</p>
+        <h1 id="StrangeIOC的入门级使用理解"><a href="#StrangeIOC的入门级使用理解" class="headerlink" title="StrangeIOC的入门级使用理解"></a>StrangeIOC的入门级使用理解</h1><p>最近在学习做框架，其中涉及了关于这个部分，于是总结一下下学习过的部分。</p>
 <p>##首先我觉得应该先官方解释明白两个重要概念</p>
 <blockquote>
 <p>控制反转即IoC (Inversion of Control)，它把传统上由程序代码直接操控的对象的调用权交给容器，通过容器来实现对象组件的装配和管理。所谓的“控制反转”概念就是对组件对象控制权的转移，从程序代码本身转移到了外部容器。</p>
@@ -99,9 +99,8 @@ IoC">
 <p>依赖注入的基本原则是：应用组件不应该负责查找资源或者其他依赖的协作对象。配置对象的工作应该由IoC容器负责，“查找资源”的逻辑应该从应用组件的代码中抽取出来，交给IoC容器负责。</p>
 </blockquote>
 <p><a href="http://zhangjunhd.blog.51cto.com/113473/126530/" target="_blank" rel="external"><br>这个是官方解释。来自于，别人的博客。</a></p>
-<p>套用学习的老师所说的话，最重要的资料通通来自官网，于是我觉得最核心的就是看下面的这张图了。<br><img src="/Users/sevenqizai/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ/Users/302819242/QQ/Temp.db/FEE831A2-9207-433E-833E-719643FB1E4B.png" alt="Alt text"></p>
-<p>##我根据使用的流程来解释这张图的各个部分，全凭记忆</p>
-<p>###1.ROOT（contextView）<br>root是进入这个框架的核心类，一切都是从这个调用出来的，一般来说会挂在一个unity3D的物体上，具体怎么挂载，全凭自由。</p>
+<p>套用学习的老师所说的话，最重要的资料通通来自官网，于是我觉得最核心的就是看下面的这张图了。<br><img src="StrangeIOC基本理解入门/1.png" alt="1"></p>
+<h2 id="我根据使用的流程来解释这张图的各个部分，全凭记忆"><a href="#我根据使用的流程来解释这张图的各个部分，全凭记忆" class="headerlink" title="我根据使用的流程来解释这张图的各个部分，全凭记忆"></a>我根据使用的流程来解释这张图的各个部分，全凭记忆</h2><h3 id="1-ROOT（contextView）"><a href="#1-ROOT（contextView）" class="headerlink" title="1.ROOT（contextView）"></a>1.ROOT（contextView）</h3><p>root是进入这个框架的核心类，一切都是从这个调用出来的，一般来说会挂在一个unity3D的物体上，具体怎么挂载，全凭自由。</p>
 <pre><code>using UnityEngine;
 using System.Collections;
 using strange.extensions.context.impl;
@@ -115,7 +114,7 @@ void Awake()
 }
 }
 </code></pre><p>这个脚本继承于ContextView。用来激活继承MVCSContext的类函数。</p>
-<p>###2.MVCSContext<br>从图中可以看出，你应该使用一个脚本继承于MVCSContext的函数，用来绑定command，mediator，services，model，dispatcher等事件。</p>
+<h3 id="2-MVCSContext"><a href="#2-MVCSContext" class="headerlink" title="2.MVCSContext"></a>2.MVCSContext</h3><p>从图中可以看出，你应该使用一个脚本继承于MVCSContext的函数，用来绑定command，mediator，services，model，dispatcher等事件。</p>
 <pre><code>using UnityEngine;
 using System.Collections;
 using strange.extensions.context.api;
@@ -148,9 +147,10 @@ protected override void mapBindings()//进行绑定映射
 }
 
 }
-</code></pre><p>###由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）</p>
-<p>####首先应该是事件模型<br>    using UnityEngine;<br>    using System.Collections;</p>
-<pre><code>//不需要继承任何类
+</code></pre><h3 id="由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）"><a href="#由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）" class="headerlink" title="由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）"></a>由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）</h3><h4 id="首先应该是事件模型"><a href="#首先应该是事件模型" class="headerlink" title="首先应该是事件模型"></a>首先应该是事件模型</h4><pre><code>using UnityEngine;
+using System.Collections;
+
+//不需要继承任何类
 
 public class ScoreModel{
 //不需要继承任何类
@@ -241,7 +241,7 @@ public void OnClickDown()
     Debug.Log(&quot;OnClickDown&quot;);
 }
 </code></pre><p>}<br>首先Mediator的这个类里面主要是两块功能，其中一个是改变数字，另外一个是随着点击更新数字。<br>所以首先这个类先监听了关于改变分数的类，然后向Controller里面的RequestCommand类中请求分数<br>而这个类，根据cubeView中的dispatcher监听OnClickDown的点击事件（点击事件里也是请求更新分数）</p>
-<p>####Command<br>参数类</p>
+<h4 id="Command"><a href="#Command" class="headerlink" title="Command"></a>Command</h4><p>参数类</p>
 <pre><code>using UnityEngine;
 using System.Collections;
 
@@ -256,7 +256,7 @@ UpdateScore
 <p>public class RequestScoreCommand : EventCommand<br>{<br>    [Inject]<br>    public IScoreService scoreService { get; set; }<br>    [Inject]<br>    public ScoreModel scoreModel { get; set; }<br>    public override void Execute()<br>    {<br>        //让这个对象不销毁<br>        Retain();<br>  scoreService.dispatcher.AddListener(Demo1ServiceEvent.RequestScore,OnComplete);<br>        Debug.Log(“requestscoreCommand”);<br>        scoreService.RequestScore(“<a href="http://xxx/xxx//xxx" target="_blank" rel="external">http://xxx/xxx//xxx</a>“);<br>    }</p>
 <pre><code>private void OnComplete(IEvent evt)//IEvent存储的就是参数
 {
- Debug.Log(&quot;requestScore OnComplete&quot;+evt.data); 
+ Debug.Log(&quot;requestScore OnComplete&quot;+evt.data);
     scoreService.dispatcher.RemoveListener(Demo1ServiceEvent.RequestScore,OnComplete);
     scoreModel.Score = (int)evt.data;
     dispatcher.Dispatch(Demo1MediatorEvent.ScoreChange,evt.data);
@@ -272,7 +272,7 @@ UpdateScore
 
 }
 </code></pre><p>}</p>
-<p>####服务器（模仿服务器而已）<br>我使用了一个接口，一个用来绑定的枚举类的事件参数，一个实现了接口的类<br>（接口）</p>
+<h4 id="服务器（模仿服务器而已）"><a href="#服务器（模仿服务器而已）" class="headerlink" title="服务器（模仿服务器而已）"></a>服务器（模仿服务器而已）</h4><p>我使用了一个接口，一个用来绑定的枚举类的事件参数，一个实现了接口的类<br>（接口）</p>
 <pre><code>using UnityEngine;
 using System.Collections;
 using strange.extensions.dispatcher.eventdispatcher.api;
@@ -324,12 +324,12 @@ public void UpdateScore(string url, int score)
 }
 }
 </code></pre><p>这个则是，服务器收到了请求并且更新了分数把给了requestScore。</p>
-<p>###感觉自己讲的乱乱的，实际上逻辑是<br>创建模型-&gt;创建View-&gt;创建Mediator-&gt;根据前面想要做的事情，由command去向-&gt;服务器请求数据-&gt;服务器得到无数-&gt;传回相应的Command，Command进行模型的更改-&gt;再去Mediator进行更改-&gt;再去将View进行更改。</p>
+<h3 id="感觉自己讲的乱乱的，实际上逻辑是"><a href="#感觉自己讲的乱乱的，实际上逻辑是" class="headerlink" title="感觉自己讲的乱乱的，实际上逻辑是"></a>感觉自己讲的乱乱的，实际上逻辑是</h3><p>创建模型-&gt;创建View-&gt;创建Mediator-&gt;根据前面想要做的事情，由command去向-&gt;服务器请求数据-&gt;服务器得到无数-&gt;传回相应的Command，Command进行模型的更改-&gt;再去Mediator进行更改-&gt;再去将View进行更改。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/22/StrangeIOC基本理解入门/" data-id="cj0l3ff850000kf9oaby8ms4h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/03/22/StrangeIOC基本理解入门/" data-id="cj0l47sje0001yu9oyhcctydk" class="article-share-link">Share</a>
       
       
     </footer>
