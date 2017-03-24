@@ -39,7 +39,7 @@
 				<h1 class="site-name"><a href="/" title="Seven_words的博客">Seven_words的博客</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -52,7 +52,7 @@
 					
 					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
 						<label>Search</label>
-						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
 						<input type="hidden" name="q" value="site:yoursite.com">
 					</form>
 					
@@ -76,7 +76,7 @@
     </p>
   <p class="article-time">
     <time datetime="2017-03-22T15:43:29.000Z" itemprop="datePublished">2017-03-22</time>
-    Updated:<time datetime="2017-03-22T15:43:39.000Z" itemprop="dateModified">2017-03-22</time>
+    更新日期:<time datetime="2017-03-22T15:43:39.000Z" itemprop="dateModified">2017-03-22</time>
     
   </p>
 </header>
@@ -84,7 +84,7 @@
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">Contents</strong>
+			<strong class="toc-title">文章目錄</strong>
 		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#StrangeIOC的入门级使用理解"><span class="toc-number">1.</span> <span class="toc-text">StrangeIOC的入门级使用理解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#我根据使用的流程来解释这张图的各个部分，全凭记忆"><span class="toc-number">1.1.</span> <span class="toc-text">我根据使用的流程来解释这张图的各个部分，全凭记忆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ROOT（contextView）"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.ROOT（contextView）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-MVCSContext"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.MVCSContext</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）"><span class="toc-number">1.1.3.</span> <span class="toc-text">由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#首先应该是事件模型"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">首先应该是事件模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Command"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">Command</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器（模仿服务器而已）"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">服务器（模仿服务器而已）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#感觉自己讲的乱乱的，实际上逻辑是"><span class="toc-number">1.1.4.</span> <span class="toc-text">感觉自己讲的乱乱的，实际上逻辑是</span></a></li></ol></li></ol></li></ol>
 		</div>
 		
@@ -342,6 +342,14 @@ public void UpdateScore(string url, int score)
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/2017/03/25/基于strangIOC的游戏框架开发（一）声音类的控制/" title="基于strangIOC的游戏框架开发(一) 声音类的控制">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  基于strangIOC的游戏框架开发(一) 声音类的控制</span>
+</a>
+</div>
+
 
 <div class="next">
 <a href="/2016/04/07/CocoaPods综合策略/"  title="CocoaPods综合策略">
@@ -355,15 +363,15 @@ public void UpdateScore(string url, int score)
 
 	
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">Contents</strong>
+  <strong class="toc-title">文章目錄</strong>
   <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#StrangeIOC的入门级使用理解"><span class="toc-number">1.</span> <span class="toc-text">StrangeIOC的入门级使用理解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#我根据使用的流程来解释这张图的各个部分，全凭记忆"><span class="toc-number">1.1.</span> <span class="toc-text">我根据使用的流程来解释这张图的各个部分，全凭记忆</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ROOT（contextView）"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.ROOT（contextView）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-MVCSContext"><span class="toc-number">1.1.2.</span> <span class="toc-text">2.MVCSContext</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）"><span class="toc-number">1.1.3.</span> <span class="toc-text">由于我做的是一个根据服务器更改UI上的数字的一个很简单的东西，所以也就根据这个例子来讲解后面的东西（不再根据如图的步骤顺序）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#首先应该是事件模型"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">首先应该是事件模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Command"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">Command</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#服务器（模仿服务器而已）"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">服务器（模仿服务器而已）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#感觉自己讲的乱乱的，实际上逻辑是"><span class="toc-number">1.1.4.</span> <span class="toc-text">感觉自己讲的乱乱的，实际上逻辑是</span></a></li></ol></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
 <aside class="clearfix">
 
   
@@ -371,7 +379,7 @@ public void UpdateScore(string url, int score)
   
 
   <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS</a>
+	<a href="null" target="_blank" title="rss">RSS 訂閱</a>
 </div>
 
 </aside>
