@@ -1,0 +1,392 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Seven_words的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Seven_words/woopqww111">
+    
+    <meta name="description" content="基于strangIOC的游戏框架开发(二) 对象池的创建和使用今天的吐槽：我当时做的时候是好使的。莫名其妙好像因为路径什么的错误。莫名其妙就是创建不出来。（好像是我性子太急，没有等小菊花加载完。。。）但是思想绝对是对的。凑合凑合看吧，我只是想记录一下做这种东西的思路###1.1创建一个资源池，定义了">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Seven_words的博客" title="Seven_words的博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Seven_words的博客">Seven_words的博客</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/03/25/基于strangIOC的游戏框架开发(二) 对象池的创建和使用/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2017-03-25T10:31:47.000Z" itemprop="datePublished">2017-03-25</time>
+    更新日期:<time datetime="2017-03-25T11:52:18.000Z" itemprop="dateModified">2017-03-25</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于strangIOC的游戏框架开发-二-对象池的创建和使用"><span class="toc-number">1.</span> <span class="toc-text">基于strangIOC的游戏框架开发(二) 对象池的创建和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#今天的吐槽：我当时做的时候是好使的。莫名其妙好像因为路径什么的错误。莫名其妙就是创建不出来。（好像是我性子太急，没有等小菊花加载完。。。）但是思想绝对是对的。凑合凑合看吧，我只是想记录一下做这种东西的思路"><span class="toc-number">1.1.</span> <span class="toc-text">今天的吐槽：我当时做的时候是好使的。莫名其妙好像因为路径什么的错误。莫名其妙就是创建不出来。（好像是我性子太急，没有等小菊花加载完。。。）但是思想绝对是对的。凑合凑合看吧，我只是想记录一下做这种东西的思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2总池"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.2总池</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3PoolManager"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.3PoolManager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4用Editor生成相应的编辑器。并且使用编辑器生成可以拖拽的文件"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.4用Editor生成相应的编辑器。并且使用编辑器生成可以拖拽的文件</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="基于strangIOC的游戏框架开发-二-对象池的创建和使用"><a href="#基于strangIOC的游戏框架开发-二-对象池的创建和使用" class="headerlink" title="基于strangIOC的游戏框架开发(二) 对象池的创建和使用"></a>基于strangIOC的游戏框架开发(二) 对象池的创建和使用</h1><h2 id="今天的吐槽：我当时做的时候是好使的。莫名其妙好像因为路径什么的错误。莫名其妙就是创建不出来。（好像是我性子太急，没有等小菊花加载完。。。）但是思想绝对是对的。凑合凑合看吧，我只是想记录一下做这种东西的思路"><a href="#今天的吐槽：我当时做的时候是好使的。莫名其妙好像因为路径什么的错误。莫名其妙就是创建不出来。（好像是我性子太急，没有等小菊花加载完。。。）但是思想绝对是对的。凑合凑合看吧，我只是想记录一下做这种东西的思路" class="headerlink" title="今天的吐槽：我当时做的时候是好使的。莫名其妙好像因为路径什么的错误。莫名其妙就是创建不出来。（好像是我性子太急，没有等小菊花加载完。。。）但是思想绝对是对的。凑合凑合看吧，我只是想记录一下做这种东西的思路"></a>今天的吐槽：我当时做的时候是好使的。莫名其妙好像因为路径什么的错误。莫名其妙就是创建不出来。（好像是我性子太急，没有等小菊花加载完。。。）但是思想绝对是对的。凑合凑合看吧，我只是想记录一下做这种东西的思路</h2><p>###1.1创建一个资源池，定义了name，prefab和可以生成的最大总数。这个资源池使用list来控制个数。<br>（新手注释：[Serializable]The Serializable attribute lets you embed a class with sub properties in the inspector.其实意思就是，可以把这个类在inspector显示出来）</p>
+<pre><code>/// &lt;summary&gt;
+/// 资源池
+/// &lt;/summary&gt;
+[Serializable]
+public class GameObjectPool
+{
+[SerializeField]
+public string name;
+[SerializeField]
+private GameObject prefab;
+[SerializeField]
+private int maxAmount;
+[NonSerialized]
+private  List&lt;GameObject&gt; goList = new List&lt;GameObject&gt;();
+</code></pre><p>   遍历这个list里的所有gameobject，如果在hierachy为false的话，则激活该gameobject，如果list的总数大于你定义的最大数量，现在面板中销毁该gameobject，其次在list中移除。如果是刚开始创建的话，则一直创建并保存在list当中</p>
+<pre><code>/// &lt;summary&gt;
+/// 从资源池中获取一个实例
+/// &lt;/summary&gt;
+public GameObject GetInstance()
+{
+    foreach (GameObject gameObject in goList)
+    {
+        if (gameObject.activeInHierarchy == false)
+        {
+            gameObject.SetActive(true);
+            return gameObject;
+        }
+    }
+    if (goList.Count &gt;= maxAmount)
+    {
+        //从集合删除
+        GameObject.Destroy(goList[0]);
+        goList.RemoveAt(0);
+    }
+   GameObject temp =   GameObject.Instantiate(prefab) as GameObject;
+    goList.Add(temp);
+    return temp;
+}
+
+}
+</code></pre><h3 id="1-2总池"><a href="#1-2总池" class="headerlink" title="1.2总池"></a>1.2总池</h3><p>上面那个类可以看作一个子池，下面这个可以看作总共有几个池子的总池，并且由于继承了ScriptableObject，到时候可以在创建的面板中，自己人工添加相应的prefab，name，和maxcount</p>
+<pre><code>public class GameObjectPoolList:ScriptableObject//继承这个类表示把自定义的类编程可以自定义资源配置的文件
+{
+
+public List&lt;GameObjectPool&gt; poolList;
+}
+</code></pre><h3 id="1-3PoolManager"><a href="#1-3PoolManager" class="headerlink" title="1.3PoolManager"></a>1.3PoolManager</h3><p>一般Manager都是单例模式。因为到时候都需要从这个里面去生成相应的实例去让外界调用。当然只需要一次生成。</p>
+<pre><code>public class PoolManager
+{
+private static PoolManager _instance;
+
+public static PoolManager Instance
+{
+    get
+    {
+        if (_instance == null)
+        {
+            _instance = new PoolManager();
+        }
+        return _instance;
+    }
+}
+</code></pre><p> 接下来这些是构建路径，把那个文件放在哪里</p>
+<pre><code>private static string poolConfigPathPrefix =&quot;Asset/Framework/Resources/&quot;;
+private static string poolConfigPathMiddle = &quot;gameobjectpool&quot;;
+private static string poolConfigPathPostfix = &quot;.asset&quot;;
+
+
+public static string PoolConfigPath
+{
+    get { return poolConfigPathPrefix + poolConfigPathMiddle + poolConfigPathPostfix; }
+}
+</code></pre><p>生成字典进行保存，并且根据名字对资源池进行调用</p>
+<pre><code>private Dictionary&lt;string, GameObjectPool&gt; poolDict;
+</code></pre><p>   新手注释：如果用Resources.Load的时候只需要名字，不需要后缀<br>    并且遍历每一个GameObjectPool中保存的每一个池子，并且赋上相应的名字，将其加入字典供以后调用</p>
+<pre><code>private PoolManager()
+{
+    //
+
+    GameObjectPoolList poolList = Resources.Load&lt;GameObjectPoolList&gt;(poolConfigPathMiddle);
+    poolDict = new Dictionary&lt;string, GameObjectPool&gt;();
+    foreach (GameObjectPool pool in poolList.poolList)
+    {
+            poolDict.Add(pool.name,pool);
+    }
+}
+
+public void Init()
+{
+    //Do nothing
+}
+
+public GameObject GetInstance(string poolName)
+{
+    GameObjectPool pool;
+    if (poolDict.TryGetValue(poolName, out pool))
+    {
+        return pool.GetInstance();
+    }
+    Debug.LogWarning(&quot;Pool&quot;+poolName+&quot; is not exits!!!&quot;);
+    return null;
+}
+}
+</code></pre><h3 id="1-4用Editor生成相应的编辑器。并且使用编辑器生成可以拖拽的文件"><a href="#1-4用Editor生成相应的编辑器。并且使用编辑器生成可以拖拽的文件" class="headerlink" title="1.4用Editor生成相应的编辑器。并且使用编辑器生成可以拖拽的文件"></a>1.4用Editor生成相应的编辑器。并且使用编辑器生成可以拖拽的文件</h3><p><img src="/2017/03/25/基于strangIOC的游戏框架开发(二) 对象池的创建和使用/" alt="1"> 对象池的创建和使用/1.png)<br>    public class PoolManagerEditor  {<br>    [MenuItem(“Manager/Crate GameObjectPoolConfig”)]<br>    static void CreateGameObjectPoolList()<br>    {<br>        GameObjectPoolList poolList = ScriptableObject.CreateInstance<gameobjectpoollist>();<br>        string path = PoolManager.PoolConfigPath;<br>        AssetDatabase.CreateAsset(poolList,path);<br>        AssetDatabase.SaveAssets();<br>    }<br>    }</gameobjectpoollist></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2017/03/25/基于strangIOC的游戏框架开发(二) 对象池的创建和使用/" data-title="Seven_words的博客" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/03/25/基于strangIOC的游戏框架开发（一）声音类的控制/"  title="基于strangIOC的游戏框架开发(一) 声音类的控制">
+ <strong>NEXT:</strong><br/> 
+ <span>基于strangIOC的游戏框架开发(一) 声音类的控制
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于strangIOC的游戏框架开发-二-对象池的创建和使用"><span class="toc-number">1.</span> <span class="toc-text">基于strangIOC的游戏框架开发(二) 对象池的创建和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#今天的吐槽：我当时做的时候是好使的。莫名其妙好像因为路径什么的错误。莫名其妙就是创建不出来。（好像是我性子太急，没有等小菊花加载完。。。）但是思想绝对是对的。凑合凑合看吧，我只是想记录一下做这种东西的思路"><span class="toc-number">1.1.</span> <span class="toc-text">今天的吐槽：我当时做的时候是好使的。莫名其妙好像因为路径什么的错误。莫名其妙就是创建不出来。（好像是我性子太急，没有等小菊花加载完。。。）但是思想绝对是对的。凑合凑合看吧，我只是想记录一下做这种东西的思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2总池"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.2总池</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3PoolManager"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.3PoolManager</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4用Editor生成相应的编辑器。并且使用编辑器生成可以拖拽的文件"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.4用Editor生成相应的编辑器。并且使用编辑器生成可以拖拽的文件</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 诶，小生仅仅只是u3d开发的新手君 <br/>
+			小生只能力所能及的写一份自己的博客</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/2273684605 http://weibo.com/2273684605" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/https://github.com/woopqww111" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://yoursite.com" target="_blank" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
