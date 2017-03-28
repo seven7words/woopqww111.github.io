@@ -1,0 +1,592 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用 | Seven_words的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Seven_words/woopqww111">
+    
+    <meta name="description" content="基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）1.1状态机管理类的创建状态机往往是用来当作切换每个页面之间状态的一种管理器。Finite State Machine
+(下面是关于这个的一点点微薄的垃圾翻译">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Seven_words的博客" title="Seven_words的博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Seven_words的博客">Seven_words的博客</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/03/27/基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用/" title="基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用" itemprop="url">基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2017-03-27T05:28:29.000Z" itemprop="datePublished">2017-03-27</time>
+    Updated:<time datetime="2017-03-28T15:50:49.000Z" itemprop="dateModified">2017-03-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于strangIOC的游戏框架开发-三-有限状态机的创建和使用"><span class="toc-number">1.</span> <span class="toc-text">基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）"><span class="toc-number">1.1.</span> <span class="toc-text">在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1状态机管理类的创建"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1状态机管理类的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2状态机的设置类"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2状态机的设置类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1追捕状态"><span class="toc-number">1.1.3.</span> <span class="toc-text">2.1追捕状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2设置巡逻状态"><span class="toc-number">1.1.4.</span> <span class="toc-text">2.2设置巡逻状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-NPC的Control类"><span class="toc-number">1.1.5.</span> <span class="toc-text">2.3 NPC的Control类</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="基于strangIOC的游戏框架开发-三-有限状态机的创建和使用"><a href="#基于strangIOC的游戏框架开发-三-有限状态机的创建和使用" class="headerlink" title="基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用"></a>基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用</h1><h2 id="在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）"><a href="#在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）" class="headerlink" title="在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）"></a>在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）</h2><h3 id="1-1状态机管理类的创建"><a href="#1-1状态机管理类的创建" class="headerlink" title="1.1状态机管理类的创建"></a>1.1状态机管理类的创建</h3><p>状态机往往是用来当作切换每个页面之间状态的一种管理器。<br><a href="http://wiki.unity3d.com/index.php/Finite_State_Machine" target="_blank" rel="external">Finite State Machine<a></a></a></p>
+<p>(下面是关于这个的一点点微薄的垃圾翻译，只需要理解一些大概的翻译就好了)<br>这个教程是基于某位大神的著作，包含两个类和两个美剧。你把它们放到你的项目里就可以得到状态机系统了。<br>组件：<br>Transition enum： 转换的枚举，包含从系统被系统干掉的所有转换。并且第一个是NullTransition。这个系统FSMSystem得用它<br>StateID enum：这是你的游戏可能需要的状态id。你可以使用枚举来引用你真正的状态类，来减少耦合。所有的状态的状态id都应该放在哪里，第一个标签应该是NullStateID。这个系统FSMSystem得用它<br>FSMState class：这个类有一个字典Transition-StateID，用来标志当发生T变换的时候，从当前的S1状态到达字典的T所对应的值的S2状态。这个类还有一个方法用来添加或者删除键值对。还有用来检查如果转换发生，得到对应的状态。状态被干掉的原因方法Reason()，和当变为那个状态的时候要做的方法Act()。<br>你不需要使用后面的那种模式，但是有些时候你可能会用。<br>FSMState 这个有限状态机类的每一个在你的游戏的NPC和游戏对象必须使用这个框架。它用List存储了NPC的状态，呦添加和删除的状态，还有基于transition改变了当前状态的执行方法PerformTransition()。你可以在你的代码任何地方使用。</p>
+<p>我们使用字典用来存储当前状态机下面分别有哪些状态。并且和当前正在处于什么状态。使用构造方法，让这个一开始就被调用。</p>
+<pre><code>/// &lt;summary&gt;
+/// 状态机管理类，有限状态机系统类
+/// &lt;/summary&gt;
+public class FSMSystem
+{
+//保存当前状态机下面有哪些状态
+private Dictionary&lt;StateID, FSMState&gt; statesDict;
+//状态机处于什么状态
+private FSMState currentState;
+
+public FSMState CurrentState
+{
+    get { return currentState; }
+}
+
+public FSMSystem()
+{
+    statesDict = new Dictionary&lt;StateID, FSMState&gt;();
+
+}
+</code></pre><p>   往状态机添加状态，如果状态为空，则报告一个警告，返回，如果当前字典包含这个状态参数，则报告返回，如果状态机字典不包含这个状态的话，则添加进来并且设置这个状态机的管理类是当前这个FSMSystem</p>
+<pre><code>/// &lt;summary&gt;
+/// 往状态机里面添加状态
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;state&quot;&gt;&lt;/param&gt;
+public void AddState(FSMState state)
+{
+    if (state == null)
+    {
+        Debug.LogError(&quot;the state you want to add is null&quot;);
+        return;
+    }
+    if (statesDict.ContainsKey(state.ID))
+    {
+        Debug.LogError(&quot;The state &quot;+state.ID+&quot;you want to add has already been added&quot;);
+        return;
+    }
+    state.fsm = this;
+    statesDict.Add(state.ID,state);
+}
+</code></pre><p>   从状态机中移除状态，如果这个状态是空值，也报出一个警告，返回，如果这个状态被检验没有的话，则也是报告出警告。否则字典中移除这个状态</p>
+<pre><code>/// &lt;summary&gt;
+/// 从状态机里移除状态
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;state&quot;&gt;&lt;/param&gt;
+public void DeleteState(FSMState state)
+{
+    if (state == null)
+    {
+        Debug.LogError(&quot;the state you want to delete is null&quot;);
+        return;
+    }
+    if (statesDict.ContainsKey(state.ID)==false)
+    {
+        Debug.LogError(&quot;The state &quot; + state.ID + &quot;you want to delete has not exit&quot;);
+        return;
+    }
+    statesDict.Remove(state.ID);
+}
+</code></pre><p>   用来控制状态机之间的转换，如果使用的转换枚举参数为空值的话，则报告错误，返回，否则根据这个参数来判断能否发生转换，如果该id如果为none，输出语句，返回。如果上述条件都不满足，则设置一个state，并且试着从字典里面根据id取出这个值。调用当前状态即将离开这个函数，并且将当前状态更改为刚刚得到的那个状态，开始调用当前状态即将进入的这个函数</p>
+<pre><code>/// &lt;summary&gt;
+/// 控制状态之间的转换
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;trans&quot;&gt;&lt;/param&gt;
+public void PerformTransition(Transition trans)
+{
+    if (trans == Transition.NullTransition)
+    {
+        Debug.LogError(&quot;NullTransition is not allowed a real transition&quot;);
+        return;
+    }
+    StateID id =  currentState.GetOutputState(trans);
+    if (id == StateID.NullStateID)
+    {
+        Debug.Log(&quot;Transition is not to be happed&quot;);
+        return;
+    }
+    FSMState state;
+    statesDict.TryGetValue(id, out state);
+    currentState.DoBeforeLeaving();
+    currentState = state;
+    currentState.DoBeforeEntering();
+}
+</code></pre><p>   设置默认状态，启动状态机，得到一个空的状态，判断可不可以根据id得到这个状态，如果可以得到，则调用即将进去的函数，并且设置当前状态机为这个状态，否则报错</p>
+<pre><code>/// &lt;summary&gt;
+/// 设置默认状态，启动状态机
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;id&quot;&gt;&lt;/param&gt;
+public void Start(StateID id)
+{
+    FSMState state;
+
+    bool isGet = statesDict.TryGetValue(id, out state);
+    if (isGet)
+    {
+        state.DoBeforeEntering();
+        currentState = state;
+    }
+    else
+    {
+        Debug.LogError(&quot;the state &quot;+id+&quot;is not exit in fsm&quot;);
+    }
+}
+}
+</code></pre><h3 id="1-2状态机的设置类"><a href="#1-2状态机的设置类" class="headerlink" title="1.2状态机的设置类"></a>1.2状态机的设置类</h3><p>首先先设置两个枚举参数，其中一个是状态转换的条件，另外一个是状态的类型的参数</p>
+<pre><code>//有哪些状态转换的条件
+public enum Transition
+    {
+NullTransition = 0,
+SawPlayer,//看到主角
+LostPlayer//看不到主角
+}
+//状态ID，是每一个状态的唯一表示，一个状态有一个stateid，而且跟其他的状态不可以重复
+public enum StateID
+    {
+NullStateID = 0,
+Patrol,//巡逻
+Chase//追主角
+}
+</code></pre><p>由于状态机只是一个抽象类。具体状态应该具体实施。<br>首先有两个字端，状态机系统管理，和状态id</p>
+<pre><code>public abstract class FSMState
+{
+public FSMSystem fsm;
+protected StateID stateID;
+
+public StateID ID
+{
+    get
+    {
+        return stateID;
+    }
+
+}
+</code></pre><p>   设置一个根据转换条件得到状态id的映射，map。</p>
+<pre><code>protected Dictionary&lt;Transition,StateID&gt; map = new Dictionary&lt;Transition, StateID&gt;();
+</code></pre><p>设置添加转换的函数<br>如果转换参数为空或者状态id为空，报错返回，如果字典包含该转换参数，也保存，否则字典添加该映射。</p>
+<pre><code>public void AddTransition(Transition trans,StateID id)
+{
+    if(trans ==Transition.NullTransition||id == StateID.NullStateID)
+    {
+        Debug.LogError(&quot;Transition or stateid is null&quot;);
+        return;
+    }
+    if (map.ContainsKey(trans))
+    {
+        Debug.LogError(&quot;State&quot;+id+&quot; is already has transtion&quot;+trans);
+    }
+    map.Add(trans,id);
+}
+</code></pre><p>删除转换条件<br>如果该映射集不包含这个key，报错返回，否则移除</p>
+<pre><code>public void DeleteTransition(Transition trans)
+{
+    if (map.ContainsKey(trans) == false)
+    {
+        Debug.LogWarning(&quot;the transition&quot;+trans+&quot; you wanted to delete is not exit in map !&quot;);
+        return;
+    }
+    map.Remove(trans);
+
+}
+</code></pre><p>   根据传递过来的转换条件，判断一下什么时候可以发生转换，如果map包含trans，则直接返回该stateid。否则返回空</p>
+<pre><code>/// &lt;summary&gt;
+/// 根据传递过来的转换条件，判断一下时候可以发生转换
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;trans&quot;&gt;&lt;/param&gt;
+/// &lt;returns&gt;&lt;/returns&gt;
+
+public StateID GetOutputState(Transition trans)
+{
+    if (map.ContainsKey(trans))
+    {
+        return map[trans];
+    }
+    return StateID.NullStateID;
+}
+</code></pre><p>   父类不需要实现，只需要子类进行重载的</p>
+<pre><code>/// &lt;summary&gt;
+/// 在进入当前状态之前，需要做的事情
+/// &lt;/summary&gt;
+public virtual void DoBeforeEntering()
+{
+
+
+/// &lt;summary&gt;
+/// 当状态机处于当前状态的时候，会一直调用
+/// &lt;/summary&gt;
+public abstract void DoUpdate();
+ }
+</code></pre><p>   父类不需要实现，只需要子类进行重载的</p>
+<pre><code>/// &lt;summary&gt;
+/// 在离开状态之前，需要做的事情
+/// &lt;/summary&gt;
+public virtual void DoBeforeLeaving()
+{
+
+}
+
+}
+</code></pre><p>前面的为纯理论抽象，下面为具体例子，大概逻辑就是，一个NPC看到人了，以后从巡逻状态变为抓铺状态，如果人跟NPC距离大于一定值后，NPC将从追捕状态变为巡逻状态，也就是两个状态之间的相互转换。</p>
+<h3 id="2-1追捕状态"><a href="#2-1追捕状态" class="headerlink" title="2.1追捕状态"></a>2.1追捕状态</h3><p>字段参数：npc，npc的刚体组件用来运动，人，以及构造方法，如果这个状态被调用了。设置状态id为抓捕，以及，将npc设置为传入的npc，player设置为player。得到刚体的具体组件</p>
+<pre><code>public class ChaseState : FSMState
+{
+private GameObject npc;
+private Rigidbody npcRd;
+private GameObject player;
+public ChaseState(GameObject         npc,GameObject player)
+{
+    stateID = StateID.Chase;
+    this.npc = npc;
+    this.player = player;
+    npcRd = npc.GetComponent&lt;Rigidbody&gt;();
+}
+设置进入之前的状态
+public override void DoBeforeEntering()
+{
+
+    Debug.Log(&quot;DoBeforeEntering&quot; + ID);
+}
+</code></pre><p>设置当前状态要做的事情</p>
+<pre><code>public override void DoUpdate()
+{
+    CheckTranstion();
+  ChaseMove();
+}
+</code></pre><p>检查变换，如果两者距离相差超过10，则设置状态为丢掉player。<br>    private void CheckTranstion()<br>    {<br>        if (Vector3.Distance(player.transform.position, npc.transform.position) &gt; 10)<br>        {<br>            fsm.PerformTransition(Transition.LostPlayer);<br>        }<br>    }<br>    如果没有丢掉的话，则开始进行npc向player移动，设置npc的速度，设置目标位置，并且要他俩在y值保持一致，才可以在一个平面上进行抓捕。npc要一直朝向目标位置（就是player的位置）<br>    private void ChaseMove()<br>    {<br>        npcRd.velocity = npc.transform.forward * 5;<br>        Vector3 targetPosition = player.transform.position;<br>        targetPosition.y = npc.transform.position.y;<br>        npc.transform.LookAt(targetPosition);<br>    }<br>}</p>
+<h3 id="2-2设置巡逻状态"><a href="#2-2设置巡逻状态" class="headerlink" title="2.2设置巡逻状态"></a>2.2设置巡逻状态</h3><pre><code>设置目标点的位置们，等等。
+</code></pre><p>public class PatrolState : FSMState<br>{<br>    private int targetWayPoint;<br>    private Transform[] wayPoints;<br>    private GameObject npc;<br>    private Rigidbody npcRd;<br>    private GameObject player;</p>
+<pre><code>设置巡逻的构造函数，十分基本不再赘述
+public PatrolState(Transform[] wp,GameObject npc,GameObject player)
+{
+   stateID = StateID.Patrol;
+    wayPoints = wp;
+    this.npc = npc;
+    npcRd = npc.GetComponent&lt;Rigidbody&gt;();
+    this.player = player;
+    targetWayPoint = 0;
+}
+
+public override void DoBeforeEntering()
+{
+
+    Debug.Log(&quot;DoBeforeEntering&quot;+ID);
+}
+
+public override void DoUpdate( )
+{
+   CheckTransition();
+    PatrolMove();
+}
+如果npc和player距离小于5，则将其参数设置为看点player。进行状态转换
+/// &lt;summary&gt;
+/// 检查转换条件
+/// &lt;/summary&gt;
+private void CheckTransition()
+{
+    if (Vector3.Distance(player.transform.position, npc.transform.position) &lt; 5)
+   {
+        fsm.PerformTransition(Transition.SawPlayer);
+    }
+}
+</code></pre><p>   否则，控制巡逻移动，设置速度，设置npc巡逻的位置，设置目标位置，保持在一个平面上，并且始终朝向目标位置如果目标位置和npc的距离小于定值时，则变为下一个点进行移动<br>    /// <summary><br>    /// 控制巡逻移动<br>    /// </summary><br>    private void PatrolMove()<br>    {<br>        npcRd.velocity = npc.transform.forward * 3;<br>        Transform targetTransform = wayPoints[targetWayPoint];<br>        Vector3 targrtPosition = targetTransform.position;<br>        targrtPosition.y = npc.transform.position.y;<br>        npc.transform.LookAt(targrtPosition);<br>        if (Vector3.Distance(npc.transform.position, targrtPosition) &lt; 1)<br>        {<br>            targetWayPoint++;<br>            targetWayPoint = targetWayPoint % wayPoints.Length;<br>        }<br>    }<br>}</p>
+<h3 id="2-3-NPC的Control类"><a href="#2-3-NPC的Control类" class="headerlink" title="2.3 NPC的Control类"></a>2.3 NPC的Control类</h3><p>设置字段，状态机管理器，npc巡逻的目标位置，player。开始时，设置player的目标对象，并且初始化状态机管理器<br>    public class NPCControl : MonoBehaviour<br>    {</p>
+<pre><code>private FSMSystem fsm;
+public Transform[] waypoints;
+private GameObject player;
+// Use this for initialization
+void Start () {
+    player = GameObject.FindGameObjectWithTag(&quot;Player&quot;);
+InitFSM();
+}
+</code></pre><p>初始化状态机管理器所需要的操作。设置巡逻状态的构造函数的参数，添加状态转换的条件：看见player变为抓捕状态。设置抓捕状态的构造函数的参数，添加状态机转换的条件：丢掉player，则变为巡逻状态。在状态机管理器里面添加这两个状态，并且设置npc为巡逻状态</p>
+<pre><code>/// &lt;summary&gt;
+/// 初始化状态机
+/// &lt;/summary&gt;
+void InitFSM()
+{
+ fsm = new FSMSystem();  
+    PatrolState patrolState = new PatrolState(waypoints,this.gameObject,player);
+    patrolState.AddTransition(Transition.SawPlayer, StateID.Chase);
+    ChaseState chaseState = new ChaseState(this.gameObject,player);
+    chaseState.AddTransition(Transition.LostPlayer, StateID.Patrol);
+    fsm.AddState(patrolState);
+    fsm.AddState(chaseState);
+    fsm.Start(StateID.Patrol);
+}
+</code></pre><p>实时进行当前状态的。</p>
+<pre><code>    void Update()
+{
+    fsm.CurrentState.DoUpdate();
+}
+
+}
+</code></pre><p>个人总结：其实这个只是我自己用来理解学习的。反正我只能说，我有点明白了状态机到底是为什么了。因为其实我根据视频学习过很多个项目，关于这个的时候我只是单纯的进行重复并不理解这个具体的称谓。但是现在终于理解了。并且理解的比以前成了体系了一点。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2017/03/27/基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用/" data-title="基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用 | Seven_words的博客" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/03/27/基于strangIOC的游戏框架开发(四) 本地化/" title="基于strangIOC的游戏框架开发(四) 本地化">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  基于strangIOC的游戏框架开发(四) 本地化</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/03/25/基于strangIOC的游戏框架开发(二) 对象池的创建和使用/"  title="基于strangIOC的游戏框架开发(二) 对象池的创建和使用">
+ <strong>NEXT:</strong><br/> 
+ <span>基于strangIOC的游戏框架开发(二) 对象池的创建和使用
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于strangIOC的游戏框架开发-三-有限状态机的创建和使用"><span class="toc-number">1.</span> <span class="toc-text">基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）"><span class="toc-number">1.1.</span> <span class="toc-text">在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1状态机管理类的创建"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1状态机管理类的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2状态机的设置类"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2状态机的设置类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1追捕状态"><span class="toc-number">1.1.3.</span> <span class="toc-text">2.1追捕状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2设置巡逻状态"><span class="toc-number">1.1.4.</span> <span class="toc-text">2.2设置巡逻状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-NPC的Control类"><span class="toc-number">1.1.5.</span> <span class="toc-text">2.3 NPC的Control类</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 诶，小生仅仅只是u3d开发的新手君 <br/>
+			小生只能力所能及的写一份自己的博客</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/2273684605 http://weibo.com/2273684605" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/https://github.com/woopqww111" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://yoursite.com" target="_blank" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>

@@ -4,16 +4,14 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>CocoaPods综合策略 | Seven_words的博客</title>
+    <title>基于strangIOC的游戏框架开发(四) 本地化 | Seven_words的博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Seven_words/woopqww111">
     
-    <meta name="description" content="#CocoaPods 总结
-##CocoaPods简介简单说：就是一个第三方管理库，当你已经来到这步的时候，我相信你已经有一定经验并且稍微懂得第三方库了。（我扒的唐巧大神的格式，以及添加了一些自己的经验之谈（当初淌过的坑都是脑子当年进得水））
+    <meta name="description" content="基于strangIOC的游戏框架开发(四) 本地化在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）1.1本地化管理类的创建，单例模式。public class LocalizationManager{
 
-##CocoaPods的安装和使用介绍
-###安装（扒">
+private static LocalizationManager">
     
     
     
@@ -69,15 +67,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/04/07/CocoaPods综合策略/" title="CocoaPods综合策略" itemprop="url">CocoaPods综合策略</a>
+      <a href="/2017/03/27/基于strangIOC的游戏框架开发(四) 本地化/" title="基于strangIOC的游戏框架开发(四) 本地化" itemprop="url">基于strangIOC的游戏框架开发(四) 本地化</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-04-07T04:31:29.000Z" itemprop="datePublished">2016-04-07</time>
-    Updated:<time datetime="2016-04-07T04:35:02.000Z" itemprop="dateModified">2016-04-07</time>
+    <time datetime="2017-03-27T06:28:29.000Z" itemprop="datePublished">2017-03-27</time>
+    Updated:<time datetime="2017-03-27T06:28:04.000Z" itemprop="dateModified">2017-03-27</time>
     
   </p>
 </header>
@@ -86,69 +84,71 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于strangIOC的游戏框架开发-四-本地化"><span class="toc-number">1.</span> <span class="toc-text">基于strangIOC的游戏框架开发(四) 本地化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）"><span class="toc-number">1.1.</span> <span class="toc-text">在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1本地化管理类的创建，单例模式。"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1本地化管理类的创建，单例模式。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2作为组件进行使用"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2作为组件进行使用</span></a></li></ol></li></ol></li></ol>
 		</div>
 		
-		<p>#CocoaPods 总结</p>
-<p>##CocoaPods简介<br>简单说：就是一个第三方管理库，当你已经来到这步的时候，我相信你已经有一定经验并且稍微懂得第三方库了。（我扒的唐巧大神的格式，以及添加了一些自己的经验之谈（当初淌过的坑都是脑子当年进得水））</p>
-<blockquote>
-<p>##CocoaPods的安装和使用介绍</p>
-<p>###安装（扒的巧大神。sorry）<br>安装方式异常简单 , Mac 下都自带 ruby，使用 ruby 的 gem 命令即可下载安装：</p>
-<pre><code>1.$ sudo gem install cocoapods
-2.$ pod setup 
-</code></pre><p>如果你的 gem 太老，可能也会有问题，可以尝试用如下命令升级 gem:</p>
-<pre><code>sudo gem update --system
-</code></pre><p>另外，ruby 的软件源 <a href="https://rubygems.org" target="_blank" rel="external">https://rubygems.org</a> 因为使用的是亚马逊的云服务，所以被墙了，需要更新一下 ruby 的源，使用如下代码将官方的 ruby 源替换成国内淘宝的源</p>
-<pre><code> gem sources --remove https://rubygems.org/
-gem sources -a http://ruby.taobao.org/
-gem sources -l
-</code></pre><p>还有一点需要注意，<code>pod setup</code>在执行时，会输出<code>Setting up CocoaPods master repo</code>，但是会等待比较久的时间。这步其实是 Cocoapods 在将它的信息下载到 <code>~/.cocoapods目录下</code>，如果你等太久，可以试着 <code>cd</code> 到那个目录，用<code>du -sh *</code>来查看下载进度。你也可以参考本文接下来的使用 cocoapods 的镜像索引一节的内容来提高下载速度。</p>
-<p>##使用CocoaPods的镜像索引<br>所有的项目的 Podspec 文件都托管在<code>https://github.com/CocoaPods/Specs</code>。第一次执行<code>pod setup</code>时，CocoaPods 会将这些podspec索引文件更新到本地的<code>~/.cocoapods/</code>目录下，这个索引文件比较大，有 80M 左右。所以第一次更新时非常慢，笔者就更新了将近 1 个小时才完成。</p>
-<p>一个叫 akinliu 的朋友在 gitcafe 和 oschina 上建立了 CocoaPods 索引库的镜像，因为 gitcafe 和 oschina 都是国内的服务器，所以在执行索引更新操作时，会快很多。如下操作可以将 CocoaPods 设置成使用 gitcafe 镜像：</p>
-<pre><code>pod repo remove master
-pod repo add master https://gitcafe.com/akuandev/Specs.git
-pod repo update
-</code></pre><p>将以上代码中的 <code>https://gitcafe.com/akuandev/Specs.git</code> 替换成 <code>http://git.oschina.net/akuandev/Specs.git</code> 即可使用 oschina 上的镜像。</p>
-<p>##使用 CocoaPods<br>使用时需要新建一个名为 Podfile 的文件，以如下格式，将依赖的库名字依次列在文件中即可</p>
-<pre><code>platform :ios ,&apos;8.0&apos;
-pod &apos;JSONKit&apos;,       &apos;~&gt; 1.4&apos;
-pod &apos;Reachability&apos;,  &apos;~&gt; 3.0.0&apos;
-pod &apos;ASIHTTPRequest&apos;
-pod &apos;RegexKitLite&apos;
-use_frameworks!
-</code></pre><p>然后你将编辑好的 Podfile 文件放到你的项目根目录中，执行如下命令即可：</p>
-<pre><code>cd &quot;your project home&quot;
-pod install
-</code></pre><p>现在，你的所有第三方库都已经下载完成并且设置好了编译参数和依赖，你只需要记住如下 2 点即可：</p>
-<p>使用 CocoaPods 生成的 .xcworkspace 文件来打开工程，而不是以前的 .xcodeproj 文件。<br>每次更改了 Podfile 文件，你需要重新执行一次pod update命令。</p>
-<p>##查找第三方库<br>你如果不知道 cocoaPods 管理的库中，是否有你想要的库，那么你可以通过 pod search 命令进行查找，以下是我用 pod search json 查找到的所有可用的库：</p>
-</blockquote>
-<p>&gt;<br>    $ pod search json<br>&gt;<br>    -&gt; AnyJSON (0.0.1)<br>    Encode / Decode JSON by any means possible.</p>
-<pre><code>- Homepage: https://github.com/mattt/AnyJSON
-- Source:   https://github.com/mattt/AnyJSON.git
-- Versions: 0.0.1 [master repo]
-</code></pre><p>&gt;<br>    -&gt; JSONKit (1.5pre)<br>    A Very High Performance Objective-C JSON Library.</p>
-<pre><code>- Homepage: https://github.com/johnezang/JSONKit
-- Source:   git://github.com/johnezang/JSONKit.git
-- Versions: 1.5pre, 1.4 [master repo]
-</code></pre><p>&gt;<br>    // … 以下省略若干行</p>
-<p>##关于 Podfile.lock</p>
-<blockquote>
-<p>当你执行pod install之后，除了 Podfile 外，CocoaPods 还会生成一个名为Podfile.lock的文件，Podfile.lock 应该加入到版本控制里面，不应该把这个文件加入到.gitignore中。因为Podfile.lock会锁定当前各依赖库的版本，之后如果多次执行pod install 不会更改版本，要pod update才会改Podfile.lock了。这样多人协作的时候，可以防止第三方库升级时造成大家各自的第三方库版本不一致。</p>
-<p>CocoaPods 的这篇 官方文档 也在What is a Podfile.lock一节中介绍了Podfile.lock的作用，并且指出：</p>
-<blockquote>
-<p>This file should always be kept under version control.</p>
-</blockquote>
-</blockquote>
-<p>##接下来是我的时间<br>小生根据网络上的教程做了个神奇的项目，因为其中的一个第三方是oc的，而我用的是swift，从此在错误中一发不可收拾，直接把我干跪。总结一下多方经验<br>1.用swift做项目，使用oc的第三方库，并且通过CocoaPods的话，不用桥接文件，重要的话说三遍，不用桥接文件。直接在你需要使用的那个文件里，直接引用就成，否则一定会疯狂报错。<br>2.我国国情原因<br>由于国内被墙，用这个 </p>
-<pre><code>pod install
-==
-/下面的等于上面那个，否则你三小时你那项目也出不来。workspace文件
-pod install --verbose --no-repo-update
-</code></pre><p>如果要更新你的第三方库的话,用这个</p>
-<pre><code>pod update
-/同理
-pod update --verbose --no-repo-update
+		<h1 id="基于strangIOC的游戏框架开发-四-本地化"><a href="#基于strangIOC的游戏框架开发-四-本地化" class="headerlink" title="基于strangIOC的游戏框架开发(四) 本地化"></a>基于strangIOC的游戏框架开发(四) 本地化</h1><h2 id="在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）"><a href="#在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）" class="headerlink" title="在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）"></a>在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）</h2><h3 id="1-1本地化管理类的创建，单例模式。"><a href="#1-1本地化管理类的创建，单例模式。" class="headerlink" title="1.1本地化管理类的创建，单例模式。"></a>1.1本地化管理类的创建，单例模式。</h3><pre><code>public class LocalizationManager{
+
+private static LocalizationManager _instance;
+
+public static LocalizationManager Instance
+{
+    get
+    {
+        if (_instance == null)
+        {
+            _instance = new LocalizationManager();
+        }
+        return _instance;
+    }
+}
+</code></pre><p>本地保存的关于词和词的对应的文件路径，默认设置当前语言</p>
+<pre><code>private const string Chinese = &quot;Locallization/Chinese&quot;;
+private const string English = &quot;Locallization/English&quot;;
+public const string Language = English;
+private Dictionary&lt;string, string&gt; dict;
+</code></pre><p>构造方法进行初始化调用。创建一个字典，从本地文件中加载数据，遍历每个行，得到对应的键值对。</p>
+<pre><code>public LocalizationManager()
+{
+    dict = new Dictionary&lt;string, string&gt;();
+    TextAsset ta =  Resources.Load&lt;TextAsset&gt;(Language);
+    string[] lines = ta.text.Split(&apos;\n&apos;);
+    foreach (string line in lines)
+    {
+        if (string.IsNullOrEmpty(line)==false)
+        {
+            string[] keyValue = line.Split(&apos;=&apos;);
+            dict.Add(keyValue[0],keyValue[1]);
+
+        }
+    }
+
+}
+
+public void Init()
+{
+
+}
+</code></pre><p>根据键得到值</p>
+<pre><code>public string GetValue(string key)
+{
+    string value;
+    dict.TryGetValue(key, out value);
+    return value;
+}
+}
+</code></pre><h3 id="1-2作为组件进行使用"><a href="#1-2作为组件进行使用" class="headerlink" title="1.2作为组件进行使用"></a>1.2作为组件进行使用</h3><pre><code>public class LocalizationText : MonoBehaviour
+{
+
+public string key;
+// Use this for initialization
+void Start ()
+{
+    string value = LocalizationManager.Instance.GetValue(key);
+    GetComponent&lt;Text&gt;().text = value;
+}
+
+}
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -158,7 +158,7 @@ pod update --verbose --no-repo-update
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2016/04/07/CocoaPods综合策略/" data-title="CocoaPods综合策略 | Seven_words的博客" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2017/03/27/基于strangIOC的游戏框架开发(四) 本地化/" data-title="基于strangIOC的游戏框架开发(四) 本地化 | Seven_words的博客" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -167,19 +167,11 @@ pod update --verbose --no-repo-update
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/03/22/StrangeIOC基本理解入门/" title="StrangeIOC的入门级使用理解">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  StrangeIOC的入门级使用理解</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2016/04/07/hello-world/"  title="Hello World">
+<a href="/2017/03/27/基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用/"  title="基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用">
  <strong>NEXT:</strong><br/> 
- <span>Hello World
+ <span>基于strangIOC的游戏框架开发(三) 有限状态机的创建和使用
 </span>
 </a>
 </div>
@@ -192,7 +184,7 @@ pod update --verbose --no-repo-update
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#基于strangIOC的游戏框架开发-四-本地化"><span class="toc-number">1.</span> <span class="toc-text">基于strangIOC的游戏框架开发(四) 本地化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）"><span class="toc-number">1.1.</span> <span class="toc-text">在飞机上很无聊，继续写，反正也快完事了。（在去面试的路上，上天保佑我过吧。）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1本地化管理类的创建，单例模式。"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1本地化管理类的创建，单例模式。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2作为组件进行使用"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2作为组件进行使用</span></a></li></ol></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
