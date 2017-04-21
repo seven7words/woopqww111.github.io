@@ -1,0 +1,321 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>最近关于Lua的学习篇总结（三） | Seven_words的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Seven_words/woopqww111">
+    
+    <meta name="description" content="最近关于Lua的学习篇总结（三）（三）lua和.Net的相互调用由于我们公司主要是用ulua进行热更新，所以不可避免的就是luainterface呢
+luainterfaceluainterface包括两个核心库，一个是luainterface.dll,一个是luanet.dll可以通过luaint">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Seven_words的博客" title="Seven_words的博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Seven_words的博客">Seven_words的博客</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/21/关于lua的总结三/" title="最近关于Lua的学习篇总结（三）" itemprop="url">最近关于Lua的学习篇总结（三）</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2017-04-21T05:50:29.000Z" itemprop="datePublished">2017-04-21</time>
+    Updated:<time datetime="2017-04-21T05:49:54.000Z" itemprop="dateModified">2017-04-21</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#最近关于Lua的学习篇总结（三）（三）"><span class="toc-number">1.</span> <span class="toc-text">最近关于Lua的学习篇总结（三）（三）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#lua和-Net的相互调用"><span class="toc-number">1.1.</span> <span class="toc-text">lua和.Net的相互调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#luainterface"><span class="toc-number">1.1.1.</span> <span class="toc-text">luainterface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在C-中执行访问lua代码"><span class="toc-number">1.1.2.</span> <span class="toc-text">在C#中执行访问lua代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取得lua环境中的变量"><span class="toc-number">1.1.3.</span> <span class="toc-text">取得lua环境中的变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在C-中执行Lua脚本文件-或者脚本字符串"><span class="toc-number">1.1.4.</span> <span class="toc-text">在C#中执行Lua脚本文件,或者脚本字符串</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lua和C-中类型的对应"><span class="toc-number">2.</span> <span class="toc-text">lua和C#中类型的对应</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#把一个C-方法注册进Lua的一个全局方法"><span class="toc-number">3.</span> <span class="toc-text">把一个C#方法注册进Lua的一个全局方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Lua中使用c-中的类"><span class="toc-number">4.</span> <span class="toc-text">在Lua中使用c#中的类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Lua中访问C-中的属性和方法"><span class="toc-number">5.</span> <span class="toc-text">在Lua中访问C#中的属性和方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Lua中访问C-中的方法-特殊情况"><span class="toc-number">6.</span> <span class="toc-text">在Lua中访问C#中的方法-特殊情况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Lua中访问C-中的方法-特殊情况-1"><span class="toc-number">7.</span> <span class="toc-text">在Lua中访问C#中的方法-特殊情况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Lua中注册C-中的事件委托（event-delegate）"><span class="toc-number">8.</span> <span class="toc-text">在Lua中注册C#中的事件委托（event delegate）</span></a></li></ol>
+		</div>
+		
+		<h1 id="最近关于Lua的学习篇总结（三）（三）"><a href="#最近关于Lua的学习篇总结（三）（三）" class="headerlink" title="最近关于Lua的学习篇总结（三）（三）"></a>最近关于Lua的学习篇总结（三）（三）</h1><h2 id="lua和-Net的相互调用"><a href="#lua和-Net的相互调用" class="headerlink" title="lua和.Net的相互调用"></a>lua和.Net的相互调用</h2><p>由于我们公司主要是用ulua进行热更新，所以不可避免的就是luainterface呢</p>
+<h3 id="luainterface"><a href="#luainterface" class="headerlink" title="luainterface"></a>luainterface</h3><p>luainterface包括两个核心库，一个是luainterface.dll,一个是luanet.dll<br>可以通过luainterface完成lua和C#的相互调用</p>
+<h3 id="在C-中执行访问lua代码"><a href="#在C-中执行访问lua代码" class="headerlink" title="在C#中执行访问lua代码"></a>在C#中执行访问lua代码</h3><p>Lua lua = new Lua();    //创建Lua解析器<br>    lua[“num”]=2;   //定义一个num<br>    lua[“str”]=”a string”;  //定义一个字符串<br>    lua.newTable(“tab”);    //创建一个表  tab={}</p>
+<h3 id="取得lua环境中的变量"><a href="#取得lua环境中的变量" class="headerlink" title="取得lua环境中的变量"></a>取得lua环境中的变量</h3><p>double num = (double)lua[“num”];</p>
+<p>string str = (string)lua[“str”];</p>
+<h3 id="在C-中执行Lua脚本文件-或者脚本字符串"><a href="#在C-中执行Lua脚本文件-或者脚本字符串" class="headerlink" title="在C#中执行Lua脚本文件,或者脚本字符串"></a>在C#中执行Lua脚本文件,或者脚本字符串</h3><p>在C#中执行Lua脚本文件,或者脚本字符串<br>lua.DoFile(“script.lua”);//执行script.lua脚本</p>
+<pre><code>lua.DoString(&quot;num=2&quot;);
+
+lua.DoString(&quot;str=&apos;a string&apos;&quot;);
+
+object[] retVals = lua.DoString(&quot;return num,str&quot;);
+</code></pre><p>在热更新中，只需要写好解析lua脚本的代码，然后c#代码不需要变动，只需要修改lua脚本就好，通过lua脚本控制游戏逻辑。</p>
+<h1 id="lua和C-中类型的对应"><a href="#lua和C-中类型的对应" class="headerlink" title="lua和C#中类型的对应"></a>lua和C#中类型的对应</h1><p>lnil        null</p>
+<pre><code>string      System.String
+
+number      System.Double
+
+boolean         System.Boolean
+
+table       LuaInterface.LuaTable
+
+function        LuaInterface.LuaFunction
+</code></pre><h1 id="把一个C-方法注册进Lua的一个全局方法"><a href="#把一个C-方法注册进Lua的一个全局方法" class="headerlink" title="把一个C#方法注册进Lua的一个全局方法"></a>把一个C#方法注册进Lua的一个全局方法</h1><p>//把一个类中的普通方法注册进去<br>lua.RegisterFunction(“NormalMethod”,obj,obj.GetType().GetMethod(“NormalMethod”))<br>lua.DoString(“ NormalMethod()”);</p>
+<p>//把一个类的静态方法注册进去<br>lua.RegisterFunction(“StaticMethod”,null,typeof(ClassName).GetMethod(“StaticMethod”))<br>lua.DoString(“ StaticMethod()”)</p>
+<h1 id="在Lua中使用c-中的类"><a href="#在Lua中使用c-中的类" class="headerlink" title="在Lua中使用c#中的类"></a>在Lua中使用c#中的类</h1><p>require “luanet”<br>–加载CLR的类型、实例化CLR对象<br>luanet.load_assembly(“System.Windows.Forms”)<br>luanet.load_assembly(“System.Drawing”)<br>Form = luanet.import_type(“System.Windows.Forms.Form”)<br>StartPosition = luanet.import_type(“System.Windows.Forms.FormStartPosition”)</p>
+<p>print(Form)<br>print(StartPosition)<br>在Lua中使用C#中的类创建对象的时候，会自动匹配最合适的构造方法</p>
+<h1 id="在Lua中访问C-中的属性和方法"><a href="#在Lua中访问C-中的属性和方法" class="headerlink" title="在Lua中访问C#中的属性和方法"></a>在Lua中访问C#中的属性和方法</h1><p>Lua代码中，访问C#对象的属性的方式和访问table的键索引一样，比如obj.name 或者 obj[“name”]</p>
+<p>Lua代码中，访问C#对象的普通函数的方式和调用table的函数一样，比如obj:method1()</p>
+<h1 id="在Lua中访问C-中的方法-特殊情况"><a href="#在Lua中访问C-中的方法-特殊情况" class="headerlink" title="在Lua中访问C#中的方法-特殊情况"></a>在Lua中访问C#中的方法-特殊情况</h1><p>当函数中有out或ref参数时，out参数和ref参数和函数的返回值一起返回，并且调用的时候，out参数不需要传入<br>C#函数定义<br>class Obj{<br>int OutMethod1(int parameter1,out parameter2,out parameter3){<br>    parameter2=34;parameter3=213;<br>    return parameter1;<br>}<br>int OutMethod2(int parameter1,ref parameter2){<br>    parameter2=parameter2+2;<br>    return parameter1+parameter2;<br>}<br>}<br>Lua中的调用和返回值<br>obj:OutMethod1(34)<br> –out参数不需要参数，这个返回一个table，里面的值为parameter1,parameter2,parameter3<br>(34,34,213)</p>
+<p>obj:OutMethod2(10,10)<br>–ref参数需要传入，返回一个table有两个值(value1,value2)</p>
+<h1 id="在Lua中访问C-中的方法-特殊情况-1"><a href="#在Lua中访问C-中的方法-特殊情况-1" class="headerlink" title="在Lua中访问C#中的方法-特殊情况"></a>在Lua中访问C#中的方法-特殊情况</h1><p>当有重载函数的时候，调用函数会自动匹配第一个能匹配的函数</p>
+<p>可以使用get_method_bysig函数得到C#中指定类的指定参数的函数用法<br>luaMethod = get_method_bysig(Obj,”CSharpMethod”,”System.String”)<br>                  luaMethod(“siki”)</p>
+<h1 id="在Lua中注册C-中的事件委托（event-delegate）"><a href="#在Lua中注册C-中的事件委托（event-delegate）" class="headerlink" title="在Lua中注册C#中的事件委托（event delegate）"></a>在Lua中注册C#中的事件委托（event delegate）</h1><p>在Lua中通过Add方法或者Remove方法把一个Lua的函数注册或者注销从C#中的事件委托中<br>function method()<br>end<br>obj.SomeEvent:Add(methodname(不用带引号))<br>私人学习笔记而已。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2017/04/21/关于lua的总结三/" data-title="最近关于Lua的学习篇总结（三） | Seven_words的博客" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/04/12/UIGrid/"  title="">
+ <strong>NEXT:</strong><br/> 
+ <span>(no title)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#最近关于Lua的学习篇总结（三）（三）"><span class="toc-number">1.</span> <span class="toc-text">最近关于Lua的学习篇总结（三）（三）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#lua和-Net的相互调用"><span class="toc-number">1.1.</span> <span class="toc-text">lua和.Net的相互调用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#luainterface"><span class="toc-number">1.1.1.</span> <span class="toc-text">luainterface</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在C-中执行访问lua代码"><span class="toc-number">1.1.2.</span> <span class="toc-text">在C#中执行访问lua代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#取得lua环境中的变量"><span class="toc-number">1.1.3.</span> <span class="toc-text">取得lua环境中的变量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在C-中执行Lua脚本文件-或者脚本字符串"><span class="toc-number">1.1.4.</span> <span class="toc-text">在C#中执行Lua脚本文件,或者脚本字符串</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#lua和C-中类型的对应"><span class="toc-number">2.</span> <span class="toc-text">lua和C#中类型的对应</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#把一个C-方法注册进Lua的一个全局方法"><span class="toc-number">3.</span> <span class="toc-text">把一个C#方法注册进Lua的一个全局方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Lua中使用c-中的类"><span class="toc-number">4.</span> <span class="toc-text">在Lua中使用c#中的类</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Lua中访问C-中的属性和方法"><span class="toc-number">5.</span> <span class="toc-text">在Lua中访问C#中的属性和方法</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Lua中访问C-中的方法-特殊情况"><span class="toc-number">6.</span> <span class="toc-text">在Lua中访问C#中的方法-特殊情况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Lua中访问C-中的方法-特殊情况-1"><span class="toc-number">7.</span> <span class="toc-text">在Lua中访问C#中的方法-特殊情况</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#在Lua中注册C-中的事件委托（event-delegate）"><span class="toc-number">8.</span> <span class="toc-text">在Lua中注册C#中的事件委托（event delegate）</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 诶，小生仅仅只是u3d开发的新手君 <br/>
+			小生只能力所能及的写一份自己的博客</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/2273684605 http://weibo.com/2273684605" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/https://github.com/woopqww111" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://yoursite.com" target="_blank" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+
+
+  </body>
+</html>
