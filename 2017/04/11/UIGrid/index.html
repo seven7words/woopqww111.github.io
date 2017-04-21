@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>UIToggle | Seven_words的博客</title>
+    <title>NGUI的UIGrid和UITable的使用 | Seven_words的博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Seven_words/woopqww111">
     
-    <meta name="description" content="UIToggle又是由实际项目中，由于自己太菜引发出的诡异的事情听我的上司大人说，UIToggle有一个诡异的缺点，只有第一次点击的时候，才会产生点击按钮产生的事件回调，之后就不会产生了，如果你想更新你的页面的话，不能实时进行更新，所以用了一个简单粗暴的方法去解决了这个问题，就是一开始把所有的boo">
+    <meta name="description" content="NGUI的UIGrid和UITable的使用目前作为一个新人的第六天，就是在公司认认真真的琢磨做页面中，好不容易终于有一个完全是自己堆页面的活。好吧其实接口逻辑都被大神们写完了，我就是一个单纯堆页面的乖宝宝。但是，由于这个事情，我对UIGrid和UITable的理解更加深了啊。
+UIGrid据这个类">
     
     
     
@@ -65,15 +66,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/11/UIToggle/" title="UIToggle" itemprop="url">UIToggle</a>
+      <a href="/2017/04/11/UIGrid/" title="NGUI的UIGrid和UITable的使用" itemprop="url">NGUI的UIGrid和UITable的使用</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
     </p>
   <p class="article-time">
-    <time datetime="2017-04-11T08:31:29.000Z" itemprop="datePublished">2017-04-11</time>
-    Updated:<time datetime="2017-04-21T05:54:23.000Z" itemprop="dateModified">2017-04-21</time>
+    <time datetime="2017-04-11T08:12:29.000Z" itemprop="datePublished">2017-04-11</time>
+    Updated:<time datetime="2017-04-21T05:54:02.000Z" itemprop="dateModified">2017-04-21</time>
     
   </p>
 </header>
@@ -82,10 +83,24 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UIToggle"><span class="toc-number">1.</span> <span class="toc-text">UIToggle</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NGUI的UIGrid和UITable的使用"><span class="toc-number">1.</span> <span class="toc-text">NGUI的UIGrid和UITable的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UIGrid"><span class="toc-number">1.1.</span> <span class="toc-text">UIGrid</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UITable"><span class="toc-number">1.2.</span> <span class="toc-text">UITable</span></a></li></ol></li></ol>
 		</div>
 		
-		<h1 id="UIToggle"><a href="#UIToggle" class="headerlink" title="UIToggle"></a>UIToggle</h1><p>又是由实际项目中，由于自己太菜引发出的诡异的事情<br>听我的上司大人说，UIToggle有一个诡异的缺点，只有第一次点击的时候，才会产生点击按钮产生的事件回调，之后就不会产生了，如果你想更新你的页面的话，不能实时进行更新，所以用了一个简单粗暴的方法去解决了这个问题，就是一开始把所有的bool都变成false。类似于重新产生这个页面的效果，这样子里面的回调才会被调用<br>至于另一个简单粗暴的方法是，它直接生成了一张lua表用来控制value的改变。</p>
+		<h1 id="NGUI的UIGrid和UITable的使用"><a href="#NGUI的UIGrid和UITable的使用" class="headerlink" title="NGUI的UIGrid和UITable的使用"></a>NGUI的UIGrid和UITable的使用</h1><p>目前作为一个新人的第六天，就是在公司认认真真的琢磨做页面中，好不容易终于有一个完全是自己堆页面的活。好吧其实接口逻辑都被大神们写完了，我就是一个单纯堆页面的乖宝宝。但是，由于这个事情，我对UIGrid和UITable的理解更加深了啊。</p>
+<h2 id="UIGrid"><a href="#UIGrid" class="headerlink" title="UIGrid"></a>UIGrid</h2><p>据这个类的英文描述来看，就是根据脚本把所有添加进该物体，并且称为该物体的子物体，以一定的格式进行防治<br>如果你想让它自动的基于它自身的大小进行摆放的话，请用UITable，并且这个类继承于UIWidgetContainer<br>（私人分析啊，其实就是UIGrid创建的每个grid大小都一样，都相同，基本上完全写死，但是UITable可以按照该物体本身的一个widget进行摆放，并且是按照widget最大的size进行摆放，分你业务需求来定即可）<br>我终于看过了这个的源码。onReposition是一个委托事件，根据它来进行是否需要重新排列。<br>      Arrangement：排列的方向。</p>
+<p>　　Sorting：排列的顺序。</p>
+<p>　　————None：没有顺序。</p>
+<p>　　————Alphabetic：按字母的顺序。</p>
+<p>　　————Horizontal：水平放置的顺序。</p>
+<p>　　————Vertical：垂直放置的顺序。</p>
+<p>　　————Custom：自定义的方式。<br>　　Pivot：抛点的位置。</p>
+<p>　　Max Per Line：最大行或是列的数量。</p>
+<p>　　Cell Width：单元之间的宽度。</p>
+<p>　　Cell Height：单元之间的高度。</p>
+<p>　　Animate Smoothly：平滑动画。</p>
+<p>　　Hide Inactive：隐藏不活动的组件。</p>
+<p>　　Keep Within Panel：保持在Panel中。<br>　　当实现定义的位置所产生的回调<br>　　public OnResoponsition onRespontion{get;set;}<br>　　在下一帧进行重排顺序<br>　　public bool repositionNow{}<br>　　所以可以自己写一个直接调用这个脚本就重排位置的函数，这样子就可以不需要在下一帧进行重排顺序<br>　　我目前在的这家公司出现的一个小bug就是因为位置是在下一帧更新就是用的RePositionNow，可是显示在当前帧就出现问题了，其实原因就是用的函数用错了而已，实际上用的是Reposition。</p>
+<h2 id="UITable"><a href="#UITable" class="headerlink" title="UITable"></a>UITable</h2><p>注意每个子节点的pivot的问题。如果所有自己点都是居中的pivot，他们会以table的中心开始排列。如果是左上的pivot，他们会以table的左上角开始排列。最好对每个table里面的条目使用同样的pivot。<br>而且UITable的参数，<br>第一个是朝向是往下排还是往上排<br>第二个是排列的顺序。<br>第三个0意味着每行无限（随便排）<br>剩下的几乎都跟UIGrid一样<br>而且UITable会在父物体里面排布，如果想在外面的话，你可以在下面再加一个widget，这样子标题什么的会出现在外面<br>并且这个竟然有一个一会再执行更新的方法诶LateUpdate<br>并且由于UIGrid实际上是一个比较规矩的排列。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -95,7 +110,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2017/04/11/UIToggle/" data-title="UIToggle | Seven_words的博客" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2017/04/11/UIGrid/" data-title="NGUI的UIGrid和UITable的使用 | Seven_words的博客" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -105,18 +120,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2017/04/21/关于lua的总结三/" title="最近关于Lua的学习篇总结（三）">
+ <a href="/2017/04/11/UIToggle/" title="UIToggle">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  最近关于Lua的学习篇总结（三）</span>
+  UIToggle</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/04/11/UIGrid/"  title="NGUI的UIGrid和UITable的使用">
+<a href="/2017/04/10/1.Lua的介绍/"  title="最近关于Lua的学习篇总结（二）">
  <strong>NEXT:</strong><br/> 
- <span>NGUI的UIGrid和UITable的使用
+ <span>最近关于Lua的学习篇总结（二）
 </span>
 </a>
 </div>
@@ -129,7 +144,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UIToggle"><span class="toc-number">1.</span> <span class="toc-text">UIToggle</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NGUI的UIGrid和UITable的使用"><span class="toc-number">1.</span> <span class="toc-text">NGUI的UIGrid和UITable的使用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#UIGrid"><span class="toc-number">1.1.</span> <span class="toc-text">UIGrid</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UITable"><span class="toc-number">1.2.</span> <span class="toc-text">UITable</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
