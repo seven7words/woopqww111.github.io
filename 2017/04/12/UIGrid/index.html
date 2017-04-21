@@ -9,8 +9,8 @@
     
     <meta name="author" content="Seven_words/woopqww111">
     
-    <meta name="description" content="title: NGUI的UIGrid和UITable的使用date: 2017-04-11 16:12:29
-tags:#NGUI的UIGrid和UITable的使用目前作为一个新人的第六天，就是在公司认认真真的琢磨做页面中，好不容易终于有一个完全是自己堆页面的活。好吧其实接口逻辑都被大神们写完了，">
+    <meta name="description" content="–title: NGUI的UIGrid和UITable的使用date: 2017-04-11 16:12:29
+tags:#NGUI的UIGrid和UITable的使用目前作为一个新人的第六天，就是在公司认认真真的琢磨做页面中，好不容易终于有一个完全是自己堆页面的活。好吧其实接口逻辑都被大神们写完了">
     
     
     
@@ -74,7 +74,7 @@ tags:#NGUI的UIGrid和UITable的使用目前作为一个新人的第六天，就
     </p>
   <p class="article-time">
     <time datetime="2017-04-12T03:44:38.000Z" itemprop="datePublished">2017-04-12</time>
-    Updated:<time datetime="2017-04-12T08:11:35.000Z" itemprop="dateModified">2017-04-12</time>
+    Updated:<time datetime="2017-04-21T05:52:49.000Z" itemprop="dateModified">2017-04-21</time>
     
   </p>
 </header>
@@ -86,8 +86,7 @@ tags:#NGUI的UIGrid和UITable的使用目前作为一个新人的第六天，就
 		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#tags"><span class="toc-number">1.</span> <span class="toc-text">tags:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UIGrid"><span class="toc-number">2.</span> <span class="toc-text">UIGrid</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#UITable"><span class="toc-number">3.</span> <span class="toc-text">UITable</span></a></li></ol>
 		</div>
 		
-		<hr>
-<p>title: NGUI的UIGrid和UITable的使用<br>date: 2017-04-11 16:12:29</p>
+		<p>–<br>title: NGUI的UIGrid和UITable的使用<br>date: 2017-04-11 16:12:29</p>
 <h2 id="tags"><a href="#tags" class="headerlink" title="tags:"></a>tags:</h2><p>#NGUI的UIGrid和UITable的使用<br>目前作为一个新人的第六天，就是在公司认认真真的琢磨做页面中，好不容易终于有一个完全是自己堆页面的活。好吧其实接口逻辑都被大神们写完了，我就是一个单纯堆页面的乖宝宝。但是，由于这个事情，我对UIGrid和UITable的理解更加深了啊。</p>
 <h2 id="UIGrid"><a href="#UIGrid" class="headerlink" title="UIGrid"></a>UIGrid</h2><p>据这个类的英文描述来看，就是根据脚本把所有添加进该物体，并且称为该物体的子物体，以一定的格式进行防治<br>如果你想让它自动的基于它自身的大小进行摆放的话，请用UITable，并且这个类继承于UIWidgetContainer<br>（私人分析啊，其实就是UIGrid创建的每个grid大小都一样，都相同，基本上完全写死，但是UITable可以按照该物体本身的一个widget进行摆放，并且是按照widget最大的size进行摆放，分你业务需求来定即可）<br>我终于看过了这个的源码。onReposition是一个委托事件，根据它来进行是否需要重新排列。<br>      Arrangement：排列的方向。</p>
 <p>　　Sorting：排列的顺序。</p>
