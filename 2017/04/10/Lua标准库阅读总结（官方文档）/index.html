@@ -1,184 +1,91 @@
-<!DOCTYPE html>
-<html>
+
+ <!DOCTYPE HTML>
+<html >
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-
-    
-
-    <title>
-      Lua标准库阅读总结（官方文档） | Seven_words的博客 
-    </title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    
-      <meta name="author" content="Seven_words/woopqww111">
-    
-    
-
-    <meta name="description" content="Lua标准库阅读总结（官方文档）Lua的标准库直接通过C语言的API进行实现的。有一些函数对于这个语言提供的功能是必不可少的（例如getmetatable和type又元表是lua的一个重要语言特性，还会总结哒）其他的提供了一些输出到外部的功能（例如IO）还有一些很有用的但是用lua自身进行实现的一些函数（例如table.sort）
-库的大纲所有的库都是通过官方的C语言的API就像C的API的一样的">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Lua标准库阅读总结（官方文档） | Seven_words的博客">
-<meta property="og:url" content="http://yoursite.com/2017/04/10/Lua标准库阅读总结（官方文档）/index.html">
-<meta property="og:site_name" content="Seven_words的博客">
-<meta property="og:description" content="Lua标准库阅读总结（官方文档）Lua的标准库直接通过C语言的API进行实现的。有一些函数对于这个语言提供的功能是必不可少的（例如getmetatable和type又元表是lua的一个重要语言特性，还会总结哒）其他的提供了一些输出到外部的功能（例如IO）还有一些很有用的但是用lua自身进行实现的一些函数（例如table.sort）
-库的大纲所有的库都是通过官方的C语言的API就像C的API的一样的">
-<meta property="og:updated_time" content="2017-04-10T12:58:46.000Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lua标准库阅读总结（官方文档） | Seven_words的博客">
-<meta name="twitter:description" content="Lua标准库阅读总结（官方文档）Lua的标准库直接通过C语言的API进行实现的。有一些函数对于这个语言提供的功能是必不可少的（例如getmetatable和type又元表是lua的一个重要语言特性，还会总结哒）其他的提供了一些输出到外部的功能（例如IO）还有一些很有用的但是用lua自身进行实现的一些函数（例如table.sort）
-库的大纲所有的库都是通过官方的C语言的API就像C的API的一样的">
-    
-    
-    
-      <link rel="icon" type="image/x-icon" href="/favicon.png">
-    
-    <link rel="stylesheet" href="/css/uno.css">
-    <link rel="stylesheet" href="/css/highlight.css">
-    <link rel="stylesheet" href="/css/archive.css">
-    <link rel="stylesheet" href="/css/china-social-icon.css">
-
-</head>
-<body>
-
-    <span class="mobile btn-mobile-menu">
-        <i class="icon icon-list btn-mobile-menu__icon"></i>
-        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
-    </span>
-
-    
-
-<header class="panel-cover panel-cover--collapsed">
-
-
-  <div class="panel-main">
-
+  <meta charset="UTF-8">
   
-    <div class="panel-main__inner panel-inverted">
-    <div class="panel-main__content">
+    <title>Lua标准库阅读总结（官方文档） | Seven_words的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Seven_words/woopqww111">
+    
+    <meta name="description" content="Lua标准库阅读总结（官方文档）Lua的标准库直接通过C语言的API进行实现的。有一些函数对于这个语言提供的功能是必不可少的（例如getmetatable和type又元表是lua的一个重要语言特性，还会总结哒）其他的提供了一些输出到外部的功能（例如IO）还有一些很有用的但是用lua自身进行实现的一些">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
 
-        
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Seven_words的博客" title="Seven_words的博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Seven_words的博客">Seven_words的博客</a></h1>
+				<h2 class="blog-motto">小生在此</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
 
-        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Seven_words的博客</a></h1>
-        <hr class="panel-cover__divider" />
-
-        
-        <p class="panel-cover__description">
-          小生在此
-        </p>
-        <hr class="panel-cover__divider panel-cover__divider--secondary" />
-        
-
-        <div class="navigation-wrapper">
-
-          <nav class="cover-navigation cover-navigation--primary">
-            <ul class="navigation">
-
-              
-                
-                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
-              
-                
-                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
-              
-                
-                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
-              
-
-            </ul>
-          </nav>
-
-          <!-- ----------------------------
-To add a new social icon simply duplicate one of the list items from below
-and change the class in the <i> tag to match the desired social network
-and then add your link to the <a>. Here is a full list of social network
-classes that you can use:
-
-    icon-social-500px
-    icon-social-behance
-    icon-social-delicious
-    icon-social-designer-news
-    icon-social-deviant-art
-    icon-social-digg
-    icon-social-dribbble
-    icon-social-facebook
-    icon-social-flickr
-    icon-social-forrst
-    icon-social-foursquare
-    icon-social-github
-    icon-social-google-plus
-    icon-social-hi5
-    icon-social-instagram
-    icon-social-lastfm
-    icon-social-linkedin
-    icon-social-medium
-    icon-social-myspace
-    icon-social-path
-    icon-social-pinterest
-    icon-social-rdio
-    icon-social-reddit
-    icon-social-skype
-    icon-social-spotify
-    icon-social-stack-overflow
-    icon-social-steam
-    icon-social-stumbleupon
-    icon-social-treehouse
-    icon-social-tumblr
-    icon-social-twitter
-    icon-social-vimeo
-    icon-social-xbox
-    icon-social-yelp
-    icon-social-youtube
-    icon-social-zerply
-    icon-mail
-
--------------------------------->
-
-<!-- add social info here -->
-
-
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="panel-cover--overlay"></div>
-  </div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/04/10/Lua标准库阅读总结（官方文档）/" title="Lua标准库阅读总结（官方文档）" itemprop="url">Lua标准库阅读总结（官方文档）</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2017-04-10T12:58:29.000Z" itemprop="datePublished">2017-04-10</time>
+    更新日期:<time datetime="2017-04-10T12:58:46.000Z" itemprop="dateModified">2017-04-10</time>
+    
+  </p>
 </header>
-
-    <div class="content-wrapper">
-        <div class="content-wrapper__inner entry">
-            
-
-<article class="post-container post-container--single">
-
-  <header class="post-header">
-    
-    <h1 class="post-title">Lua标准库阅读总结（官方文档）</h1>
-
-    
-
-    <div class="post-meta">
-      <time datetime="2017-04-10" class="post-meta__date date">2017-04-10</time> 
-
-      <span class="post-meta__tags tags">
-
-          
-
-          
-
-      </span>
-    </div>
-    
-    
-
-  </header>
-
-  <section id="post-content" class="article-content post">
-    <h1 id="Lua标准库阅读总结（官方文档）"><a href="#Lua标准库阅读总结（官方文档）" class="headerlink" title="Lua标准库阅读总结（官方文档）"></a>Lua标准库阅读总结（官方文档）</h1><p>Lua的标准库直接通过C语言的API进行实现的。有一些函数对于这个语言提供的功能是必不可少的（例如getmetatable和type又元表是lua的一个重要语言特性，还会总结哒）其他的提供了一些输出到外部的功能（例如IO）还有一些很有用的但是用lua自身进行实现的一些函数（例如table.sort）</p>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lua标准库阅读总结（官方文档）"><span class="toc-number">1.</span> <span class="toc-text">Lua标准库阅读总结（官方文档）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#库的大纲"><span class="toc-number">1.1.</span> <span class="toc-text">库的大纲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Basic-Functions"><span class="toc-number">1.2.</span> <span class="toc-text">1.Basic Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-assert-v-message"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.1 assert (v [, message])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-collectgarbage-opt-arg"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2 collectgarbage (opt [, arg])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-dofile-filename"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.3 dofile (filename)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-error-message-level"><span class="toc-number">1.2.4.</span> <span class="toc-text">1.4 error (message [, level])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-G全局环境表-全局变量"><span class="toc-number">1.2.5.</span> <span class="toc-text">1.5 _G全局环境表(全局变量)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-getmetatable-object"><span class="toc-number">1.2.6.</span> <span class="toc-text">1.6 getmetatable(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-ipairs-t"><span class="toc-number">1.2.7.</span> <span class="toc-text">1.7 ipairs (t)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-load-chunk-chunkname-mode-env"><span class="toc-number">1.2.8.</span> <span class="toc-text">1.7 load (chunk [, chunkname [, mode [, env]]])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-loadfile-filename-mode-env"><span class="toc-number">1.2.9.</span> <span class="toc-text">1.8 loadfile ([filename [, mode [, env]]])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-9-next-table-index"><span class="toc-number">1.2.10.</span> <span class="toc-text">1.9 next (table [, index])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-10-pairs-t"><span class="toc-number">1.2.11.</span> <span class="toc-text">1.10 pairs (t)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-11-pcall-f-arg1-···"><span class="toc-number">1.2.12.</span> <span class="toc-text">1.11 pcall (f [, arg1, ···])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-print-···"><span class="toc-number">1.2.13.</span> <span class="toc-text">1.12 print (···)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-13-rawequal-v1-v2"><span class="toc-number">1.2.14.</span> <span class="toc-text">1.13 rawequal (v1, v2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-14-rawget-table-index"><span class="toc-number">1.2.15.</span> <span class="toc-text">1.14 rawget (table, index)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-15-rawlen-v"><span class="toc-number">1.2.16.</span> <span class="toc-text">1.15 rawlen (v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-16-rawset-table-index-value"><span class="toc-number">1.2.17.</span> <span class="toc-text">1.16 rawset (table, index, value)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-17-select-index-···"><span class="toc-number">1.2.18.</span> <span class="toc-text">1.17 select (index, ···)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-18-setmetatable-table-metatable"><span class="toc-number">1.2.19.</span> <span class="toc-text">1.18 setmetatable (table, metatable)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-19-tonumber-e-base"><span class="toc-number">1.2.20.</span> <span class="toc-text">1.19    tonumber (e [, base])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-20-tostring-v"><span class="toc-number">1.2.21.</span> <span class="toc-text">1.20    tostring (v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-21-VERSION"><span class="toc-number">1.2.22.</span> <span class="toc-text">1.21    _VERSION</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Coroutine-Manipulation"><span class="toc-number">1.3.</span> <span class="toc-text">2.Coroutine Manipulation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-coroutine-create-f"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.1    coroutine.create (f)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-coroutine-isyieldable"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.2    coroutine.isyieldable ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-coroutine-resume-co-val1-···"><span class="toc-number">1.3.3.</span> <span class="toc-text">2.3    coroutine.resume (co [, val1, ···])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-coroutine-running"><span class="toc-number">1.3.4.</span> <span class="toc-text">2.4    coroutine.running ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-coroutine-status-co"><span class="toc-number">1.3.5.</span> <span class="toc-text">2.5    coroutine.status (co)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-coroutine-wrap-f"><span class="toc-number">1.3.6.</span> <span class="toc-text">2.6    coroutine.wrap (f)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-coroutine-yield-···"><span class="toc-number">1.3.7.</span> <span class="toc-text">2.7     coroutine.yield (···)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Modules"><span class="toc-number">1.4.</span> <span class="toc-text">3. Modules</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-require-modname"><span class="toc-number">1.4.1.</span> <span class="toc-text">3.1    require (modname)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-package-cpath"><span class="toc-number">1.4.2.</span> <span class="toc-text">3.2　　package.cpath</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-package-loaded"><span class="toc-number">1.4.3.</span> <span class="toc-text">3.3　　package.loaded</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-package-loadlib-libname-funcname"><span class="toc-number">1.4.4.</span> <span class="toc-text">3.4　　package.loadlib (libname, funcname)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-package-path"><span class="toc-number">1.4.5.</span> <span class="toc-text">3.5　　package.path</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-package-preload"><span class="toc-number">1.4.6.</span> <span class="toc-text">3.6     package.preload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-package-seeall-module"><span class="toc-number">1.4.7.</span> <span class="toc-text">3.7　　package.seeall(module)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-package-searchers"><span class="toc-number">1.4.8.</span> <span class="toc-text">3.8　　package.searchers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-9-package-searchpath-name-path-sep-rep"><span class="toc-number">1.4.9.</span> <span class="toc-text">3.9　　package.searchpath (name, path [, sep [, rep]])</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-String-Manipulation"><span class="toc-number">1.5.</span> <span class="toc-text">4.String Manipulation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-string-byte-string-pos"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.1        string.byte(string [,pos])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-string-char-i1-i2…"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.2        string.char(i1,i2…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-string-dump-functoin"><span class="toc-number">1.5.3.</span> <span class="toc-text">4.3        string.dump(functoin)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-string-find-s-pattern-init-plain"><span class="toc-number">1.5.4.</span> <span class="toc-text">4.4 string.find(s,pattern [,init [,plain]])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-string-format-formatstring-···"><span class="toc-number">1.5.5.</span> <span class="toc-text">4.5        string.format (formatstring, ···)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-string-gmatch-s-pattern"><span class="toc-number">1.5.6.</span> <span class="toc-text">4.6    string.gmatch (s, pattern)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-string-len-s"><span class="toc-number">1.5.7.</span> <span class="toc-text">4.7 string.len(s):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-string-lower-s"><span class="toc-number">1.5.8.</span> <span class="toc-text">4.8 string.lower(s):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-9-string-match-s-pattern-init"><span class="toc-number">1.5.9.</span> <span class="toc-text">4.9 string.match (s, pattern [, init])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-10-string-pack-fmt-v1-v2-···"><span class="toc-number">1.5.10.</span> <span class="toc-text">4.10 string.pack (fmt, v1, v2, ···)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-11-string-packsize-fmt"><span class="toc-number">1.5.11.</span> <span class="toc-text">4.11 string.packsize (fmt)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-12-string-upper-s"><span class="toc-number">1.5.12.</span> <span class="toc-text">4.12 string.upper(s):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-13-string-rep-s-n-sep"><span class="toc-number">1.5.13.</span> <span class="toc-text">4.13 string.rep (s, n [, sep])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-14-string-sub-s-i-j"><span class="toc-number">1.5.14.</span> <span class="toc-text">4.14    string.sub(s,i [,j])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-15-string-reverse-s"><span class="toc-number">1.5.15.</span> <span class="toc-text">4.15    string.reverse (s)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-16-string-sub-s-i-j"><span class="toc-number">1.5.16.</span> <span class="toc-text">4.16    string.sub (s, i [, j])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-17-string-unpack-fmt-s-pos"><span class="toc-number">1.5.17.</span> <span class="toc-text">4.17    string.unpack (fmt, s [, pos])</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Table-Manipulation"><span class="toc-number">1.6.</span> <span class="toc-text">5. Table Manipulation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-table-concat-table-sep-start-end"><span class="toc-number">1.6.1.</span> <span class="toc-text">5.1    table.concat(table, sep,  start, end)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-table-insert"><span class="toc-number">1.6.2.</span> <span class="toc-text">5.2    table.insert()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-table-remove-table-pos"><span class="toc-number">1.6.3.</span> <span class="toc-text">5.3    table.remove(table, pos)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-table-sort"><span class="toc-number">1.6.4.</span> <span class="toc-text">5.4    table.sort()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Math"><span class="toc-number">1.7.</span> <span class="toc-text">6. Math</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-IO库"><span class="toc-number">1.8.</span> <span class="toc-text">7.IO库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-io-close-file"><span class="toc-number">1.8.1.</span> <span class="toc-text">7.1 io.close ([file])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2、io-flush"><span class="toc-number">1.8.2.</span> <span class="toc-text">7.2、io.flush ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3、io-lines-filename"><span class="toc-number">1.8.3.</span> <span class="toc-text">7.3、io.lines ([filename])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-io-open-filename-mode"><span class="toc-number">1.8.4.</span> <span class="toc-text">7.4 io.open (filename [, mode])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5、io-output-file"><span class="toc-number">1.8.5.</span> <span class="toc-text">7.5、io.output ([file])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-6、io-popen-prog-mode"><span class="toc-number">1.8.6.</span> <span class="toc-text">7.6、io.popen ([prog [, mode]])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-7、io-read-…"><span class="toc-number">1.8.7.</span> <span class="toc-text">7.7、io.read (…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-8、io-tmpfile"><span class="toc-number">1.8.8.</span> <span class="toc-text">7.8、io.tmpfile ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-9、io-type-obj"><span class="toc-number">1.8.9.</span> <span class="toc-text">7.9、io.type (obj)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-10、io-write-…"><span class="toc-number">1.8.10.</span> <span class="toc-text">7.10、io.write (…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-11、file-close"><span class="toc-number">1.8.11.</span> <span class="toc-text">7.11、file:close()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-12、file-flush"><span class="toc-number">1.8.12.</span> <span class="toc-text">7.12、file:flush()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-13、file-lines"><span class="toc-number">1.8.13.</span> <span class="toc-text">7.13、file:lines()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-14、file-read-…"><span class="toc-number">1.8.14.</span> <span class="toc-text">7.14、file:read(…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-15、file-seek-whence-offset"><span class="toc-number">1.8.15.</span> <span class="toc-text">7.15、file:seek([whence][,offset])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-16、file-setvbuf-mode-size"><span class="toc-number">1.8.16.</span> <span class="toc-text">7.16、file:setvbuf(mode,[,size])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-17、file-write-…"><span class="toc-number">1.8.17.</span> <span class="toc-text">7.17、file:write(…)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-OS库"><span class="toc-number">1.9.</span> <span class="toc-text">8.OS库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-os-clock"><span class="toc-number">1.9.1.</span> <span class="toc-text">8.1 os.clock ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-os-difftime-t2-t1"><span class="toc-number">1.9.2.</span> <span class="toc-text">8.2 os.difftime (t2, t1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-os-execute-command"><span class="toc-number">1.9.3.</span> <span class="toc-text">8.3 os.execute ([command])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-4-os-exit"><span class="toc-number">1.9.4.</span> <span class="toc-text">8.4 os.exit()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-5-os-getenv-varname"><span class="toc-number">1.9.5.</span> <span class="toc-text">8.5 os.getenv (varname)-</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-6-os-remove-filename"><span class="toc-number">1.9.6.</span> <span class="toc-text">8.6 os.remove (filename)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-7-os-rename-oldname-newname"><span class="toc-number">1.9.7.</span> <span class="toc-text">8.7 os.rename (oldname, newname)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-8os-setlocale-locale-category"><span class="toc-number">1.9.8.</span> <span class="toc-text">8.8os.setlocale (locale [, category])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-9-os-time-table"><span class="toc-number">1.9.9.</span> <span class="toc-text">8.9 os.time ([table])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-10-os-tmpname"><span class="toc-number">1.9.10.</span> <span class="toc-text">8.10 os.tmpname()</span></a></li></ol></li></ol></li></ol>
+		</div>
+		
+		<h1 id="Lua标准库阅读总结（官方文档）"><a href="#Lua标准库阅读总结（官方文档）" class="headerlink" title="Lua标准库阅读总结（官方文档）"></a>Lua标准库阅读总结（官方文档）</h1><p>Lua的标准库直接通过C语言的API进行实现的。有一些函数对于这个语言提供的功能是必不可少的（例如getmetatable和type又元表是lua的一个重要语言特性，还会总结哒）其他的提供了一些输出到外部的功能（例如IO）还有一些很有用的但是用lua自身进行实现的一些函数（例如table.sort）</p>
 <h2 id="库的大纲"><a href="#库的大纲" class="headerlink" title="库的大纲"></a>库的大纲</h2><p>所有的库都是通过官方的C语言的API就像C的API的一样的进行分离。</p>
 <pre><code>1.basic library 
 2.coroutine library 
@@ -402,68 +309,232 @@ string.gsub (s, pattern, repl [, n])
 <h3 id="8-8os-setlocale-locale-category"><a href="#8-8os-setlocale-locale-category" class="headerlink" title="8.8os.setlocale (locale [, category])"></a>8.8os.setlocale (locale [, category])</h3><p>功能：设置程序的当前设置,函数返回最新的值，失败则返回nil<br>参数：<br>　　locale：一个指定当前设置的字串<br>　　　　　 “”:一个空字串，当前设置被视为本地设置<br>　　　　　“c”:当前设置被视为标准c设置<br> 　　　　 nil:返回category指示设置名的当前值<br>　　category：一个描述要更改的设置名<br>         “all”[默认], “collate”, “ctype”, “monetary”, “numeric”, “time”</p>
 <h3 id="8-9-os-time-table"><a href="#8-9-os-time-table" class="headerlink" title="8.9 os.time ([table])"></a>8.9 os.time ([table])</h3><p>功能：按table的内容返回一个时间值(数字),若不带参数则返回当前时间table的字段：</p>
 <h3 id="8-10-os-tmpname"><a href="#8-10-os-tmpname" class="headerlink" title="8.10 os.tmpname()"></a>8.10 os.tmpname()</h3><p>功能：返回一个临时文件名</p>
-
-  </section>
-
-  <section class="post-comments">
-
-    <!-- 将评论系统（例如Disqus、多说、友言、畅言等）提供的代码片段粘贴在这里 -->
-    
-</section>
+  
+	</div>
+		<footer class="article-footer clearfix">
 
 
-</article>
 
 
-            <footer class="footer">
+<div class="article-share" id="share">
 
-    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
-    
-</footer>
-        </div>
+  <div data-url="http://yoursite.com/2017/04/10/Lua标准库阅读总结（官方文档）/" data-title="Lua标准库阅读总结（官方文档） | Seven_words的博客" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2017/04/10/1.Lua在游戏的作用/" title="最近关于Lua的学习篇总结（一）">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  最近关于Lua的学习篇总结（一）</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/03/27/基于strangIOC的游戏框架开发(四) 本地化/"  title="基于strangIOC的游戏框架开发(四) 本地化">
+ <strong>NEXT:</strong><br/> 
+ <span>基于strangIOC的游戏框架开发(四) 本地化
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Lua标准库阅读总结（官方文档）"><span class="toc-number">1.</span> <span class="toc-text">Lua标准库阅读总结（官方文档）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#库的大纲"><span class="toc-number">1.1.</span> <span class="toc-text">库的大纲</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-Basic-Functions"><span class="toc-number">1.2.</span> <span class="toc-text">1.Basic Functions</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-assert-v-message"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.1 assert (v [, message])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-collectgarbage-opt-arg"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2 collectgarbage (opt [, arg])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-dofile-filename"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.3 dofile (filename)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-error-message-level"><span class="toc-number">1.2.4.</span> <span class="toc-text">1.4 error (message [, level])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-G全局环境表-全局变量"><span class="toc-number">1.2.5.</span> <span class="toc-text">1.5 _G全局环境表(全局变量)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-getmetatable-object"><span class="toc-number">1.2.6.</span> <span class="toc-text">1.6 getmetatable(object)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-ipairs-t"><span class="toc-number">1.2.7.</span> <span class="toc-text">1.7 ipairs (t)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-7-load-chunk-chunkname-mode-env"><span class="toc-number">1.2.8.</span> <span class="toc-text">1.7 load (chunk [, chunkname [, mode [, env]]])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-8-loadfile-filename-mode-env"><span class="toc-number">1.2.9.</span> <span class="toc-text">1.8 loadfile ([filename [, mode [, env]]])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-9-next-table-index"><span class="toc-number">1.2.10.</span> <span class="toc-text">1.9 next (table [, index])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-10-pairs-t"><span class="toc-number">1.2.11.</span> <span class="toc-text">1.10 pairs (t)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-11-pcall-f-arg1-···"><span class="toc-number">1.2.12.</span> <span class="toc-text">1.11 pcall (f [, arg1, ···])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-12-print-···"><span class="toc-number">1.2.13.</span> <span class="toc-text">1.12 print (···)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-13-rawequal-v1-v2"><span class="toc-number">1.2.14.</span> <span class="toc-text">1.13 rawequal (v1, v2)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-14-rawget-table-index"><span class="toc-number">1.2.15.</span> <span class="toc-text">1.14 rawget (table, index)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-15-rawlen-v"><span class="toc-number">1.2.16.</span> <span class="toc-text">1.15 rawlen (v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-16-rawset-table-index-value"><span class="toc-number">1.2.17.</span> <span class="toc-text">1.16 rawset (table, index, value)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-17-select-index-···"><span class="toc-number">1.2.18.</span> <span class="toc-text">1.17 select (index, ···)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-18-setmetatable-table-metatable"><span class="toc-number">1.2.19.</span> <span class="toc-text">1.18 setmetatable (table, metatable)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-19-tonumber-e-base"><span class="toc-number">1.2.20.</span> <span class="toc-text">1.19    tonumber (e [, base])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-20-tostring-v"><span class="toc-number">1.2.21.</span> <span class="toc-text">1.20    tostring (v)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-21-VERSION"><span class="toc-number">1.2.22.</span> <span class="toc-text">1.21    _VERSION</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-Coroutine-Manipulation"><span class="toc-number">1.3.</span> <span class="toc-text">2.Coroutine Manipulation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-coroutine-create-f"><span class="toc-number">1.3.1.</span> <span class="toc-text">2.1    coroutine.create (f)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-coroutine-isyieldable"><span class="toc-number">1.3.2.</span> <span class="toc-text">2.2    coroutine.isyieldable ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-coroutine-resume-co-val1-···"><span class="toc-number">1.3.3.</span> <span class="toc-text">2.3    coroutine.resume (co [, val1, ···])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-coroutine-running"><span class="toc-number">1.3.4.</span> <span class="toc-text">2.4    coroutine.running ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-coroutine-status-co"><span class="toc-number">1.3.5.</span> <span class="toc-text">2.5    coroutine.status (co)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-6-coroutine-wrap-f"><span class="toc-number">1.3.6.</span> <span class="toc-text">2.6    coroutine.wrap (f)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-7-coroutine-yield-···"><span class="toc-number">1.3.7.</span> <span class="toc-text">2.7     coroutine.yield (···)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-Modules"><span class="toc-number">1.4.</span> <span class="toc-text">3. Modules</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-require-modname"><span class="toc-number">1.4.1.</span> <span class="toc-text">3.1    require (modname)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-package-cpath"><span class="toc-number">1.4.2.</span> <span class="toc-text">3.2　　package.cpath</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-package-loaded"><span class="toc-number">1.4.3.</span> <span class="toc-text">3.3　　package.loaded</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-package-loadlib-libname-funcname"><span class="toc-number">1.4.4.</span> <span class="toc-text">3.4　　package.loadlib (libname, funcname)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-package-path"><span class="toc-number">1.4.5.</span> <span class="toc-text">3.5　　package.path</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-package-preload"><span class="toc-number">1.4.6.</span> <span class="toc-text">3.6     package.preload</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-package-seeall-module"><span class="toc-number">1.4.7.</span> <span class="toc-text">3.7　　package.seeall(module)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-package-searchers"><span class="toc-number">1.4.8.</span> <span class="toc-text">3.8　　package.searchers</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-9-package-searchpath-name-path-sep-rep"><span class="toc-number">1.4.9.</span> <span class="toc-text">3.9　　package.searchpath (name, path [, sep [, rep]])</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-String-Manipulation"><span class="toc-number">1.5.</span> <span class="toc-text">4.String Manipulation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-string-byte-string-pos"><span class="toc-number">1.5.1.</span> <span class="toc-text">4.1        string.byte(string [,pos])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-string-char-i1-i2…"><span class="toc-number">1.5.2.</span> <span class="toc-text">4.2        string.char(i1,i2…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-string-dump-functoin"><span class="toc-number">1.5.3.</span> <span class="toc-text">4.3        string.dump(functoin)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-string-find-s-pattern-init-plain"><span class="toc-number">1.5.4.</span> <span class="toc-text">4.4 string.find(s,pattern [,init [,plain]])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-string-format-formatstring-···"><span class="toc-number">1.5.5.</span> <span class="toc-text">4.5        string.format (formatstring, ···)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-6-string-gmatch-s-pattern"><span class="toc-number">1.5.6.</span> <span class="toc-text">4.6    string.gmatch (s, pattern)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-7-string-len-s"><span class="toc-number">1.5.7.</span> <span class="toc-text">4.7 string.len(s):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-8-string-lower-s"><span class="toc-number">1.5.8.</span> <span class="toc-text">4.8 string.lower(s):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-9-string-match-s-pattern-init"><span class="toc-number">1.5.9.</span> <span class="toc-text">4.9 string.match (s, pattern [, init])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-10-string-pack-fmt-v1-v2-···"><span class="toc-number">1.5.10.</span> <span class="toc-text">4.10 string.pack (fmt, v1, v2, ···)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-11-string-packsize-fmt"><span class="toc-number">1.5.11.</span> <span class="toc-text">4.11 string.packsize (fmt)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-12-string-upper-s"><span class="toc-number">1.5.12.</span> <span class="toc-text">4.12 string.upper(s):</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-13-string-rep-s-n-sep"><span class="toc-number">1.5.13.</span> <span class="toc-text">4.13 string.rep (s, n [, sep])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-14-string-sub-s-i-j"><span class="toc-number">1.5.14.</span> <span class="toc-text">4.14    string.sub(s,i [,j])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-15-string-reverse-s"><span class="toc-number">1.5.15.</span> <span class="toc-text">4.15    string.reverse (s)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-16-string-sub-s-i-j"><span class="toc-number">1.5.16.</span> <span class="toc-text">4.16    string.sub (s, i [, j])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-17-string-unpack-fmt-s-pos"><span class="toc-number">1.5.17.</span> <span class="toc-text">4.17    string.unpack (fmt, s [, pos])</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-Table-Manipulation"><span class="toc-number">1.6.</span> <span class="toc-text">5. Table Manipulation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-table-concat-table-sep-start-end"><span class="toc-number">1.6.1.</span> <span class="toc-text">5.1    table.concat(table, sep,  start, end)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-table-insert"><span class="toc-number">1.6.2.</span> <span class="toc-text">5.2    table.insert()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-table-remove-table-pos"><span class="toc-number">1.6.3.</span> <span class="toc-text">5.3    table.remove(table, pos)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-table-sort"><span class="toc-number">1.6.4.</span> <span class="toc-text">5.4    table.sort()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-Math"><span class="toc-number">1.7.</span> <span class="toc-text">6. Math</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-IO库"><span class="toc-number">1.8.</span> <span class="toc-text">7.IO库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-io-close-file"><span class="toc-number">1.8.1.</span> <span class="toc-text">7.1 io.close ([file])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2、io-flush"><span class="toc-number">1.8.2.</span> <span class="toc-text">7.2、io.flush ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3、io-lines-filename"><span class="toc-number">1.8.3.</span> <span class="toc-text">7.3、io.lines ([filename])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-4-io-open-filename-mode"><span class="toc-number">1.8.4.</span> <span class="toc-text">7.4 io.open (filename [, mode])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-5、io-output-file"><span class="toc-number">1.8.5.</span> <span class="toc-text">7.5、io.output ([file])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-6、io-popen-prog-mode"><span class="toc-number">1.8.6.</span> <span class="toc-text">7.6、io.popen ([prog [, mode]])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-7、io-read-…"><span class="toc-number">1.8.7.</span> <span class="toc-text">7.7、io.read (…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-8、io-tmpfile"><span class="toc-number">1.8.8.</span> <span class="toc-text">7.8、io.tmpfile ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-9、io-type-obj"><span class="toc-number">1.8.9.</span> <span class="toc-text">7.9、io.type (obj)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-10、io-write-…"><span class="toc-number">1.8.10.</span> <span class="toc-text">7.10、io.write (…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-11、file-close"><span class="toc-number">1.8.11.</span> <span class="toc-text">7.11、file:close()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-12、file-flush"><span class="toc-number">1.8.12.</span> <span class="toc-text">7.12、file:flush()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-13、file-lines"><span class="toc-number">1.8.13.</span> <span class="toc-text">7.13、file:lines()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-14、file-read-…"><span class="toc-number">1.8.14.</span> <span class="toc-text">7.14、file:read(…)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-15、file-seek-whence-offset"><span class="toc-number">1.8.15.</span> <span class="toc-text">7.15、file:seek([whence][,offset])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-16、file-setvbuf-mode-size"><span class="toc-number">1.8.16.</span> <span class="toc-text">7.16、file:setvbuf(mode,[,size])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-17、file-write-…"><span class="toc-number">1.8.17.</span> <span class="toc-text">7.17、file:write(…)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-OS库"><span class="toc-number">1.9.</span> <span class="toc-text">8.OS库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-os-clock"><span class="toc-number">1.9.1.</span> <span class="toc-text">8.1 os.clock ()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-os-difftime-t2-t1"><span class="toc-number">1.9.2.</span> <span class="toc-text">8.2 os.difftime (t2, t1)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-os-execute-command"><span class="toc-number">1.9.3.</span> <span class="toc-text">8.3 os.execute ([command])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-4-os-exit"><span class="toc-number">1.9.4.</span> <span class="toc-text">8.4 os.exit()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-5-os-getenv-varname"><span class="toc-number">1.9.5.</span> <span class="toc-text">8.5 os.getenv (varname)-</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-6-os-remove-filename"><span class="toc-number">1.9.6.</span> <span class="toc-text">8.6 os.remove (filename)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-7-os-rename-oldname-newname"><span class="toc-number">1.9.7.</span> <span class="toc-text">8.7 os.rename (oldname, newname)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-8os-setlocale-locale-category"><span class="toc-number">1.9.8.</span> <span class="toc-text">8.8os.setlocale (locale [, category])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-9-os-time-table"><span class="toc-number">1.9.9.</span> <span class="toc-text">8.9 os.time ([table])</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-10-os-tmpname"><span class="toc-number">1.9.10.</span> <span class="toc-text">8.10 os.tmpname()</span></a></li></ol></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
     </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 诶，小生仅仅只是u3d开发的新手君 <br/>
+			小生只能力所能及的写一份自己的博客</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/2273684605 http://weibo.com/2273684605" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/https://github.com/woopqww111" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://yoursite.com" target="_blank" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
 
-    <!-- js files -->
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/scale.fix.js"></script>
-    
-
-    
-
-    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript"> 
-        $(document).ready(function(){
-            MathJax.Hub.Config({ 
-                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
-            });
-        });
-    </script>
-
-
-    
-
-    <script src="/js/awesome-toc.min.js"></script>
-    <script>
-        $(document).ready(function(){
-            $.awesome_toc({
-                overlay: true,
-                contentId: "post-content",
-            });
-        });
-    </script>
-
-
-    
-    
-
-    <script src="/js/jquery.githubRepoWidget.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
 
 
-    <!--kill ie6 -->
-<!--[if IE 6]>
-  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
-<![endif]-->
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
 
-</body>
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+  </body>
 </html>
