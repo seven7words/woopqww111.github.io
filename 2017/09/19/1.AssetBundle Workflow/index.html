@@ -4,12 +4,14 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>UIToggle | Seven_words的博客</title>
+    <title>AssetBundle Workflow (一) | Seven_words的博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Seven_words/woopqww111">
     
-    <meta name="description" content="UIToggle又是由实际项目中，由于自己太菜引发出的诡异的事情听我的上司大人说，UIToggle有一个诡异的缺点，只有第一次点击的时候，才会产生点击按钮产生的事件回调，之后就不会产生了，如果你想更新你的页面的话，不能实时进行更新，所以用了一个简单粗暴的方法去解决了这个问题，就是一开始把所有的boo">
+    <meta name="description" content="#AssetBundles学习in。。。最近跟着视频学习in。。。老师说，我们跟着他学其实只是在学二手资料。so。二手资料多尴尬啊。我要看一手。所以官网上的资料是最perfect了。在下垃圾的英语水平要试着翻译一下， 理解一下：
+##AssetBundle Workflow 
+####AssetBu">
     
     
     
@@ -65,15 +67,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/11/UIToggle/" title="UIToggle" itemprop="url">UIToggle</a>
+      <a href="/2017/09/19/1.AssetBundle Workflow/" title="AssetBundle Workflow (一)" itemprop="url">AssetBundle Workflow (一)</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
     </p>
   <p class="article-time">
-    <time datetime="2017-04-11T08:31:29.000Z" itemprop="datePublished">2017-04-11</time>
-    Updated:<time datetime="2017-07-04T02:57:21.000Z" itemprop="dateModified">2017-07-04</time>
+    <time datetime="2017-09-19T07:43:29.000Z" itemprop="datePublished">2017-09-19</time>
+    Updated:<time datetime="2017-09-19T07:46:57.000Z" itemprop="dateModified">2017-09-19</time>
     
   </p>
 </header>
@@ -82,10 +84,61 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UIToggle"><span class="toc-number">1.</span> <span class="toc-text">UIToggle</span></a></li></ol>
+		
 		</div>
 		
-		<h1 id="UIToggle"><a href="#UIToggle" class="headerlink" title="UIToggle"></a>UIToggle</h1><p>又是由实际项目中，由于自己太菜引发出的诡异的事情<br>听我的上司大人说，UIToggle有一个诡异的缺点，只有第一次点击的时候，才会产生点击按钮产生的事件回调，之后就不会产生了，如果你想更新你的页面的话，不能实时进行更新，所以用了一个简单粗暴的方法去解决了这个问题，就是一开始把所有的bool都变成false。类似于重新产生这个页面的效果，这样子里面的回调才会被调用<br>至于另一个简单粗暴的方法是，它直接生成了一张lua表用来控制value的改变。</p>
+		<p>#AssetBundles学习in。。。<br>最近跟着视频学习in。。。老师说，我们跟着他学其实只是在学二手资料。so。二手资料多尴尬啊。我要看一手。所以官网上的资料是最perfect了。<br>在下垃圾的英语水平要试着翻译一下， 理解一下：</p>
+<p>##AssetBundle Workflow </p>
+<p>####AssetBundle 工作流程<br>balabla的介绍听从下面的步骤即可</p>
+<p>###Assigning Assets to AssetBundles</p>
+<p>####分配资源（Assets）给AssetBundles<br>分配指定的资源给AssetBundles，有如下几个步骤：<br>1.从你的项目里选择你想分配给bundle的asset。<br>2.在Inspector里测试你的object<br>3.在Inspector的底部你会看见一个（我实在不知道怎么描述这个）其实就是一个方块。用来分配AssetBundle和后缀的<br>4.左边的下拉框是用来分配AssetBundle的名字的，右边的下拉框是用来分配后缀的名字的<br>5.点击左边的下拉框看是不是None覆盖了已经注册的AssetBundle的名字<br>6.如果没有什么被创建。你可以看那个下拉框的上部的清单<br>7.点击New可以创建一个新的AssetBundle<br>8.就是命名是有规范的，你看你自己想怎么创建都行，并且／这个符号是用来分开文件夹和assetbundle的。只有最后一个是assetbundle。其他在／这个前面的都是文件夹<br>9.一旦你选择或者创建亿个AssetBundle名字，你可以重复上面的步骤去分配或者创建后缀名。如果你想的话，后缀名可以不参与打包。</p>
+<p>###Build the AssetBundle</p>
+<p>####创建AssetBundles<br>这个步骤呢是只有在编辑器 下可以，所以呢，你得创建一个叫做Editor的文件夹，并且在里面编写一个Editor脚本类似于：</p>
+<pre><code>using UnityEditor;
+public class CreateAssetBundles
+{
+[MenuItem(&quot;Assets/Build AssetBundles&quot;)]
+static void BuildAllAssetBundles()
+            {
+            string assetBundleDirectory = &quot;Assets/AssetBundles&quot;;
+            if(!Directory.Exists(assetBundleDirectory)
+        {
+        Directory.CreateDirectory(assetBundleDirectory);
+            }
+    BuildPipeline.BuildAssetBundles(assetBundleDirectory,         BuildAssetBundleOptions.None, BuildTarget.Standalone);
+    }
+    }
+</code></pre><p>看代码就可知其意。没啥好解释的。</p>
+<p>###Upload AssetBundle to off-site storage<br>每个用户的使用方法是不一样的。所以Unity可以告诉你怎么做，如果你计划上传你的AssetBundle给第三方主机，按照下方的实例可以模仿一下，如果你严格的在本地开发，并且企图将所有的AssetBundle放在本地磁盘里。那么跳过下面的步骤。</p>
+<p>###Loading AssetBundles and Assets<br>为了用户可以在本地内存中加载，使用AssetBundles.LoadFromFile API。就像下面代码一样。<br>(官网给的是js，我个人用C#所以我翻译了一下）</p>
+<pre><code>public class LoadFromFileExample : MonoBehaviour
+{    
+    void Start() {
+            AssetBundle myLoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, &quot;myassetBundle&quot;));
+        if (myLoadedAssetBundle == null)
+        {
+            Debug.Log(&quot;Failed to load AssetBundle!&quot;);
+            return;
+        }
+        var prefab = myLoadedAssetBundle.LoadAsset&lt;GameObject&gt; (&quot;MyObject&quot;);
+
+        Instantiate(prefab);
+    }
+}
+</code></pre><p>LoadFromFIle就是从路径中的bundle文件读取。<br>如果你自己托管你的AssetBundles彬哥切你需要去下载他们到你的游戏里，你应该使用UnityWebRequest  ，下面是例子：</p>
+<pre><code>IEnumerator InstantiateObject()
+{
+    string uri = &quot;file:///&quot; + Application.dataPath + &quot;/AssetBundles/&quot; + assetBundleName;        
+    UnityEngine.Networking.UnityWebRequest request = UnityEngine.Networking.UnityWebRequest.GetAssetBundle(uri, 0);
+    yield return request.Send();
+    AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
+    GameObject cube = bundle.LoadAsset&lt;GameObject&gt;(&quot;Cube&quot;);
+    GameObject sprite = bundle.LoadAsset&lt;GameObject&gt;(&quot;Sprite&quot;);
+    Instantiate(cube);
+    Instantiate(sprite);
+}
+</code></pre><p>GetAssetBundle(string,int)就是根据uri得到assetbundle的位置，和你想下载的版本号。你可以使用本地的uri。也可以使用主机的。</p>
+<p>UnityWebRequest 是一个特殊的用来处理这类需求的API。DownloadHandlerAssetBundle。用来从当前的request得到AssetBundle。<br>不管你使用哪类方法，最终都需要一个入口从AssetBundle中获取范型的对象。LoadAsset<gameobject>。然后。没什么了。</gameobject></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -95,7 +148,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2017/04/11/UIToggle/" data-title="UIToggle | Seven_words的博客" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2017/09/19/1.AssetBundle Workflow/" data-title="AssetBundle Workflow (一) | Seven_words的博客" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -104,19 +157,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/04/21/关于lua的总结三/" title="最近关于Lua的学习篇总结（三）">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  最近关于Lua的学习篇总结（三）</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/04/11/UIGrid/"  title="NGUI的UIGrid和UITable的使用">
+<a href="/2017/07/04/给自己的新人君体验须知/"  title="给自己的新人君体验须知">
  <strong>NEXT:</strong><br/> 
- <span>NGUI的UIGrid和UITable的使用
+ <span>给自己的新人君体验须知
 </span>
 </a>
 </div>
@@ -129,7 +174,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UIToggle"><span class="toc-number">1.</span> <span class="toc-text">UIToggle</span></a></li></ol>
+  
   </div>
 
 <div id="asidepart">
