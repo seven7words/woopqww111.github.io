@@ -1,0 +1,321 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Seven_words的博客</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Seven_words/woopqww111">
+    
+    <meta name="description" content="Preparing Assets for AssetBundles当使用AssetBundles的时候你可以自由的分配任何资产给你想要的bundle。然而如何去设置你的bundle其实是由策略的。下面的分组策略是有用的，但是你需要去看是否适合你的项目。当然一切看你需求，想咋用这些策略都可以。
+Log">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Seven_words的博客" title="Seven_words的博客"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Seven_words的博客">Seven_words的博客</a></h1>
+				<h2 class="blog-motto">小生在此</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/09/19/2.Preparing Assets for AssetBundles/" title="" itemprop="url"></a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2017-09-19T08:42:06.000Z" itemprop="datePublished">2017-09-19</time>
+    Updated:<time datetime="2017-09-19T08:42:06.000Z" itemprop="dateModified">2017-09-19</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Preparing-Assets-for-AssetBundles"><span class="toc-number">1.</span> <span class="toc-text">Preparing Assets for AssetBundles</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logical-Entity-Grouping-逻辑实体分组"><span class="toc-number">1.1.</span> <span class="toc-text">Logical Entity Grouping 逻辑实体分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-Grouping-类型分组"><span class="toc-number">1.2.</span> <span class="toc-text">Type Grouping 类型分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Concurrent-Content-Grouping按照使用分组"><span class="toc-number">1.3.</span> <span class="toc-text">Concurrent Content Grouping按照使用分组</span></a></li></ol></li></ol>
+		</div>
+		
+		<h1 id="Preparing-Assets-for-AssetBundles"><a href="#Preparing-Assets-for-AssetBundles" class="headerlink" title="Preparing Assets for AssetBundles"></a>Preparing Assets for AssetBundles</h1><p>当使用AssetBundles的时候你可以自由的分配任何资产给你想要的bundle。<br>然而如何去设置你的bundle其实是由策略的。下面的分组策略是有用的，但是你需要去看是否适合你的项目。当然一切看你需求，想咋用这些策略都可以。</p>
+<h2 id="Logical-Entity-Grouping-逻辑实体分组"><a href="#Logical-Entity-Grouping-逻辑实体分组" class="headerlink" title="Logical Entity Grouping 逻辑实体分组"></a>Logical Entity Grouping 逻辑实体分组</h2><p>逻辑实体分组通常是基于他们所带便的功能来分配的。他们可以包括的部分有UI，characters，environments和甚至一些贯穿应用中的生命周期里频繁出现的其他部分。</p>
+<ul>
+<li>一个UI界面或者所有UI界面一个包（这个界面里面的贴图和布局信息一个包）</li>
+<li>一个角色或者所有角色一个包（这个角色里面的模型和动画一个包）</li>
+<li>所有的场景所共享的部分一个包（包括贴图和模型）<br>逻辑实体分组是可下载内容（DLC）的理想选择，因为以这种方式分离的所有内容，您可以对单个实体进行更改，而不需要下载额外的未更改Assets。<br>oh。想要实现这个，你需要对准确的了解项目中assets的使用时间和位置才可以将其分配给各自的包<h2 id="Type-Grouping-类型分组"><a href="#Type-Grouping-类型分组" class="headerlink" title="Type Grouping 类型分组"></a>Type Grouping 类型分组</h2>对于此策略，您可以将类似类型的资产（如音轨或语言本地化文件）分配给单个AssetBundle。因为纹理压缩格式和设置的更改频率比您的代码脚本或预制的频率更低。<br>类型分组是构建要由多个平台使用的AssetBundles的做好的策略之一。 例如如果你声音资源在windows和mac平台的压缩设置是相同的，你可以将所有的声音资源的数据打包到AssetBundles中，并且重复使用。然而如果是shader的话，可能在每个平台的指定的选项是不一样的。所以mac上的包是不能在windows上用的。除此之外，这些方法也可以很好的使用来适应unity编辑器的兼容性，因为纹理压缩格式和设置的更改频率比您的代码脚本或预制的频率更低。<br>总结：所有声音资源打成一个包，所有shader打成一个包，所有模型打成一个包，所有材质打成一个包<h2 id="Concurrent-Content-Grouping按照使用分组"><a href="#Concurrent-Content-Grouping按照使用分组" class="headerlink" title="Concurrent Content Grouping按照使用分组"></a>Concurrent Content Grouping按照使用分组</h2>按照使用分组是将同时加载和使用的资产捆绑在一起的方法。您可以将这些类型的包用于基于level的游戏，其中每个级别都包含完全独特的角色，纹理，音乐等。您希望绝对确定其中一个AssetBundles中的资产仅在同一时间将使用该捆绑中的其余资产。对按照使用分组捆绑中的单个资产的依赖将导致显着增加的加载时间。您将被迫下载该单一资产的整个捆绑包。</li>
+</ul>
+<p>按照使用分组最常见的用例是基于场景。在此分配策略中，每个场景束应包含大部分或全部场景依赖关系。</p>
+<p>请注意，一个项目绝对可以并且应该根据需要混合这些策略。使用任何给定情景的最优资产分配策略可大大提高任何项目的效率。</p>
+<p>例如，项目可以决定将用于不同平台的用户界面（UI）元素分组到他们自己的Platform-UI特定的捆绑包中，但按照级别/场景对其交互式内容进行分组。</p>
+<p>无论您遵循的策略如何，这里还有一些额外的提示，可以全面铭记于心：</p>
+<p>将经常更新的对象拆分成AssetBundles与很少更改的对象分开<br>组合可能同时加载的对象。如模型，纹理和动画<br>如果您注意到多个AssetBundles中的多个对象取决于完全不同的AssetBundle中的单个资产，请将依赖关系移动到单独的AssetBundle。如果几个AssetBundles引用了其他AssetBundles中的同一组资产，那么可能值得将这些依赖关系引入共享的AssetBundle以减少重复。<br>如果两组对象不太可能同时加载，例如标准和高清资产，请确保它们在自己的资产组合中。<br>考虑拆分AssetBundle，如果少于该捆绑的50％在同一时间经常加载<br>考虑组合资产小数（少于5到10个资产），但其内容经常同时加载<br>如果一组对象是同一对象的简单不同版本，请考虑AssetBundle的后缀</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2017/09/19/2.Preparing Assets for AssetBundles/" data-title="Seven_words的博客" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2017/09/19/1.AssetBundle Workflow/"  title="AssetBundle Workflow (一)">
+ <strong>NEXT:</strong><br/> 
+ <span>AssetBundle Workflow (一)
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Preparing-Assets-for-AssetBundles"><span class="toc-number">1.</span> <span class="toc-text">Preparing Assets for AssetBundles</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logical-Entity-Grouping-逻辑实体分组"><span class="toc-number">1.1.</span> <span class="toc-text">Logical Entity Grouping 逻辑实体分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-Grouping-类型分组"><span class="toc-number">1.2.</span> <span class="toc-text">Type Grouping 类型分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Concurrent-Content-Grouping按照使用分组"><span class="toc-number">1.3.</span> <span class="toc-text">Concurrent Content Grouping按照使用分组</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> 诶，小生仅仅只是u3d开发的新手君 <br/>
+			小生只能力所能及的写一份自己的博客</p>
+	</section>
+	 
+	<div class="social-font clearfix">
+		
+		<a href="http://weibo.com/2273684605 http://weibo.com/2273684605" target="_blank" title="weibo"></a>
+		
+		
+		
+		<a href="https://github.com/https://github.com/woopqww111" target="_blank" title="github"></a>
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2017 
+		
+		<a href="http://yoursite.com" target="_blank" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+  </body>
+</html>
