@@ -9,9 +9,8 @@
     
     <meta name="author" content="Seven_words/woopqww111">
     
-    <meta name="description" content="#AssetBundles学习in。。。最近跟着视频学习in。。。老师说，我们跟着他学其实只是在学二手资料。so。二手资料多尴尬啊。我要看一手。所以官网上的资料是最perfect了。在下垃圾的英语水平要试着翻译一下， 理解一下：
-##AssetBundle Workflow 
-####AssetBu">
+    <meta name="description" content="AssetBundles学习in。。。最近跟着视频学习in。。。老师说，我们跟着他学其实只是在学二手资料。so。二手资料多尴尬啊。我要看一手。所以官网上的资料是最perfect了。在下垃圾的英语水平要试着翻译一下， 理解一下：
+AssetBundle WorkflowAssetBundle 工作流程">
     
     
     
@@ -75,7 +74,7 @@
     </p>
   <p class="article-time">
     <time datetime="2017-09-19T07:43:29.000Z" itemprop="datePublished">2017-09-19</time>
-    Updated:<time datetime="2017-09-19T07:46:57.000Z" itemprop="dateModified">2017-09-19</time>
+    Updated:<time datetime="2017-09-19T07:49:17.000Z" itemprop="dateModified">2017-09-19</time>
     
   </p>
 </header>
@@ -84,16 +83,13 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#AssetBundles学习in。。。"><span class="toc-number">1.</span> <span class="toc-text">AssetBundles学习in。。。</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AssetBundle-Workflow"><span class="toc-number">1.1.</span> <span class="toc-text">AssetBundle Workflow</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#AssetBundle-工作流程"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">AssetBundle 工作流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Assigning-Assets-to-AssetBundles"><span class="toc-number">1.1.1.</span> <span class="toc-text">Assigning Assets to AssetBundles</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分配资源（Assets）给AssetBundles"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">分配资源（Assets）给AssetBundles</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-the-AssetBundle"><span class="toc-number">1.1.2.</span> <span class="toc-text">Build the AssetBundle</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建AssetBundles"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">创建AssetBundles</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Upload-AssetBundle-to-off-site-storage"><span class="toc-number">1.1.3.</span> <span class="toc-text">Upload AssetBundle to off-site storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Loading-AssetBundles-and-Assets"><span class="toc-number">1.1.4.</span> <span class="toc-text">Loading AssetBundles and Assets</span></a></li></ol></li></ol></li></ol>
 		</div>
 		
-		<p>#AssetBundles学习in。。。<br>最近跟着视频学习in。。。老师说，我们跟着他学其实只是在学二手资料。so。二手资料多尴尬啊。我要看一手。所以官网上的资料是最perfect了。<br>在下垃圾的英语水平要试着翻译一下， 理解一下：</p>
-<p>##AssetBundle Workflow </p>
-<p>####AssetBundle 工作流程<br>balabla的介绍听从下面的步骤即可</p>
-<p>###Assigning Assets to AssetBundles</p>
-<p>####分配资源（Assets）给AssetBundles<br>分配指定的资源给AssetBundles，有如下几个步骤：<br>1.从你的项目里选择你想分配给bundle的asset。<br>2.在Inspector里测试你的object<br>3.在Inspector的底部你会看见一个（我实在不知道怎么描述这个）其实就是一个方块。用来分配AssetBundle和后缀的<br>4.左边的下拉框是用来分配AssetBundle的名字的，右边的下拉框是用来分配后缀的名字的<br>5.点击左边的下拉框看是不是None覆盖了已经注册的AssetBundle的名字<br>6.如果没有什么被创建。你可以看那个下拉框的上部的清单<br>7.点击New可以创建一个新的AssetBundle<br>8.就是命名是有规范的，你看你自己想怎么创建都行，并且／这个符号是用来分开文件夹和assetbundle的。只有最后一个是assetbundle。其他在／这个前面的都是文件夹<br>9.一旦你选择或者创建亿个AssetBundle名字，你可以重复上面的步骤去分配或者创建后缀名。如果你想的话，后缀名可以不参与打包。</p>
-<p>###Build the AssetBundle</p>
-<p>####创建AssetBundles<br>这个步骤呢是只有在编辑器 下可以，所以呢，你得创建一个叫做Editor的文件夹，并且在里面编写一个Editor脚本类似于：</p>
+		<h1 id="AssetBundles学习in。。。"><a href="#AssetBundles学习in。。。" class="headerlink" title="AssetBundles学习in。。。"></a>AssetBundles学习in。。。</h1><p>最近跟着视频学习in。。。老师说，我们跟着他学其实只是在学二手资料。so。二手资料多尴尬啊。我要看一手。所以官网上的资料是最perfect了。<br>在下垃圾的英语水平要试着翻译一下， 理解一下：</p>
+<h2 id="AssetBundle-Workflow"><a href="#AssetBundle-Workflow" class="headerlink" title="AssetBundle Workflow"></a>AssetBundle Workflow</h2><h4 id="AssetBundle-工作流程"><a href="#AssetBundle-工作流程" class="headerlink" title="AssetBundle 工作流程"></a>AssetBundle 工作流程</h4><p>balabla的介绍听从下面的步骤即可</p>
+<h3 id="Assigning-Assets-to-AssetBundles"><a href="#Assigning-Assets-to-AssetBundles" class="headerlink" title="Assigning Assets to AssetBundles"></a>Assigning Assets to AssetBundles</h3><h4 id="分配资源（Assets）给AssetBundles"><a href="#分配资源（Assets）给AssetBundles" class="headerlink" title="分配资源（Assets）给AssetBundles"></a>分配资源（Assets）给AssetBundles</h4><p>分配指定的资源给AssetBundles，有如下几个步骤：<br>1.从你的项目里选择你想分配给bundle的asset。<br>2.在Inspector里测试你的object<br>3.在Inspector的底部你会看见一个（我实在不知道怎么描述这个）其实就是一个方块。用来分配AssetBundle和后缀的<br>4.左边的下拉框是用来分配AssetBundle的名字的，右边的下拉框是用来分配后缀的名字的<br>5.点击左边的下拉框看是不是None覆盖了已经注册的AssetBundle的名字<br>6.如果没有什么被创建。你可以看那个下拉框的上部的清单<br>7.点击New可以创建一个新的AssetBundle<br>8.就是命名是有规范的，你看你自己想怎么创建都行，并且／这个符号是用来分开文件夹和assetbundle的。只有最后一个是assetbundle。其他在／这个前面的都是文件夹<br>9.一旦你选择或者创建亿个AssetBundle名字，你可以重复上面的步骤去分配或者创建后缀名。如果你想的话，后缀名可以不参与打包。</p>
+<h3 id="Build-the-AssetBundle"><a href="#Build-the-AssetBundle" class="headerlink" title="Build the AssetBundle"></a>Build the AssetBundle</h3><h4 id="创建AssetBundles"><a href="#创建AssetBundles" class="headerlink" title="创建AssetBundles"></a>创建AssetBundles</h4><p>这个步骤呢是只有在编辑器 下可以，所以呢，你得创建一个叫做Editor的文件夹，并且在里面编写一个Editor脚本类似于：</p>
 <pre><code>using UnityEditor;
 public class CreateAssetBundles
 {
@@ -109,8 +105,8 @@ static void BuildAllAssetBundles()
     }
     }
 </code></pre><p>看代码就可知其意。没啥好解释的。</p>
-<p>###Upload AssetBundle to off-site storage<br>每个用户的使用方法是不一样的。所以Unity可以告诉你怎么做，如果你计划上传你的AssetBundle给第三方主机，按照下方的实例可以模仿一下，如果你严格的在本地开发，并且企图将所有的AssetBundle放在本地磁盘里。那么跳过下面的步骤。</p>
-<p>###Loading AssetBundles and Assets<br>为了用户可以在本地内存中加载，使用AssetBundles.LoadFromFile API。就像下面代码一样。<br>(官网给的是js，我个人用C#所以我翻译了一下）</p>
+<h3 id="Upload-AssetBundle-to-off-site-storage"><a href="#Upload-AssetBundle-to-off-site-storage" class="headerlink" title="Upload AssetBundle to off-site storage"></a>Upload AssetBundle to off-site storage</h3><p>每个用户的使用方法是不一样的。所以Unity可以告诉你怎么做，如果你计划上传你的AssetBundle给第三方主机，按照下方的实例可以模仿一下，如果你严格的在本地开发，并且企图将所有的AssetBundle放在本地磁盘里。那么跳过下面的步骤。</p>
+<h3 id="Loading-AssetBundles-and-Assets"><a href="#Loading-AssetBundles-and-Assets" class="headerlink" title="Loading AssetBundles and Assets"></a>Loading AssetBundles and Assets</h3><p>为了用户可以在本地内存中加载，使用AssetBundles.LoadFromFile API。就像下面代码一样。<br>(官网给的是js，我个人用C#所以我翻译了一下）</p>
 <pre><code>public class LoadFromFileExample : MonoBehaviour
 {    
     void Start() {
@@ -174,7 +170,7 @@ static void BuildAllAssetBundles()
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#AssetBundles学习in。。。"><span class="toc-number">1.</span> <span class="toc-text">AssetBundles学习in。。。</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AssetBundle-Workflow"><span class="toc-number">1.1.</span> <span class="toc-text">AssetBundle Workflow</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#AssetBundle-工作流程"><span class="toc-number">1.1.0.1.</span> <span class="toc-text">AssetBundle 工作流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Assigning-Assets-to-AssetBundles"><span class="toc-number">1.1.1.</span> <span class="toc-text">Assigning Assets to AssetBundles</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#分配资源（Assets）给AssetBundles"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">分配资源（Assets）给AssetBundles</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Build-the-AssetBundle"><span class="toc-number">1.1.2.</span> <span class="toc-text">Build the AssetBundle</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建AssetBundles"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">创建AssetBundles</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Upload-AssetBundle-to-off-site-storage"><span class="toc-number">1.1.3.</span> <span class="toc-text">Upload AssetBundle to off-site storage</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Loading-AssetBundles-and-Assets"><span class="toc-number">1.1.4.</span> <span class="toc-text">Loading AssetBundles and Assets</span></a></li></ol></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
