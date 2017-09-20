@@ -4,12 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>UIToggle | Seven_words的博客</title>
+    <title>Building AssetBundles（三） | Seven_words的博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Seven_words/woopqww111">
     
-    <meta name="description" content="UIToggle又是由实际项目中，由于自己太菜引发出的诡异的事情听我的上司大人说，UIToggle有一个诡异的缺点，只有第一次点击的时候，才会产生点击按钮产生的事件回调，之后就不会产生了，如果你想更新你的页面的话，不能实时进行更新，所以用了一个简单粗暴的方法去解决了这个问题，就是一开始把所有的boo">
+    <meta name="description" content="Building AssetBundlesBuildPipeline.BuildAssetBundles这个方法有三个参数。outputPath：这是AssetBundles将输出到的目录，但是必须确保buildAssetBundle的时候，该文件夹必须存在
+BuildAssetBundleOpti">
     
     
     
@@ -65,15 +66,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/04/11/UIToggle/" title="UIToggle" itemprop="url">UIToggle</a>
+      <a href="/2017/09/20/Building AssetBundles/" title="Building AssetBundles（三）" itemprop="url">Building AssetBundles（三）</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
     </p>
   <p class="article-time">
-    <time datetime="2017-04-11T08:31:29.000Z" itemprop="datePublished">2017-04-11</time>
-    Updated:<time datetime="2017-07-04T02:57:21.000Z" itemprop="dateModified">2017-07-04</time>
+    <time datetime="2017-09-20T03:30:29.000Z" itemprop="datePublished">2017-09-20</time>
+    Updated:<time datetime="2017-09-20T03:27:17.000Z" itemprop="dateModified">2017-09-20</time>
     
   </p>
 </header>
@@ -82,10 +83,32 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UIToggle"><span class="toc-number">1.</span> <span class="toc-text">UIToggle</span></a></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Building-AssetBundles"><span class="toc-number">1.</span> <span class="toc-text">Building AssetBundles</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BuildAssetBundleOptions"><span class="toc-number">1.1.</span> <span class="toc-text">BuildAssetBundleOptions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BuildTarget"><span class="toc-number">1.2.</span> <span class="toc-text">BuildTarget</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Manifest-File"><span class="toc-number">1.3.</span> <span class="toc-text">The Manifest File</span></a></li></ol></li></ol>
 		</div>
 		
-		<h1 id="UIToggle"><a href="#UIToggle" class="headerlink" title="UIToggle"></a>UIToggle</h1><p>又是由实际项目中，由于自己太菜引发出的诡异的事情<br>听我的上司大人说，UIToggle有一个诡异的缺点，只有第一次点击的时候，才会产生点击按钮产生的事件回调，之后就不会产生了，如果你想更新你的页面的话，不能实时进行更新，所以用了一个简单粗暴的方法去解决了这个问题，就是一开始把所有的bool都变成false。类似于重新产生这个页面的效果，这样子里面的回调才会被调用<br>至于另一个简单粗暴的方法是，它直接生成了一张lua表用来控制value的改变。</p>
+		<h1 id="Building-AssetBundles"><a href="#Building-AssetBundles" class="headerlink" title="Building AssetBundles"></a>Building AssetBundles</h1><p>BuildPipeline.BuildAssetBundles这个方法有三个参数。<br>outputPath：这是AssetBundles将输出到的目录，但是必须确保buildAssetBundle的时候，该文件夹必须存在</p>
+<h2 id="BuildAssetBundleOptions"><a href="#BuildAssetBundleOptions" class="headerlink" title="BuildAssetBundleOptions"></a>BuildAssetBundleOptions</h2><p>BuildAssetBundleOptions这个选项里有好几个分类，你可以随意指定其中一个。<br>你可以随着你的项目自由的使用该参数，然而这个参数实际上是用来处理AssetBundle的压缩的。</p>
+<ul>
+<li>BuildAssetBundleOptions.None：这个选项使用的是LZMA压缩算法。如果要使用LZMAde压缩包里的文件，必须将整个包解压。然而这个由于压缩的大小最小，所以解压加载的时间相对来说也最长。一旦该压缩方式的文件被解压，在磁盘中将使用LZ4算法将不需要被使用的AssetBundle重新压缩。这个的最好的使用方式是那种，要把该AssetBUndle里的所有文件都使用的方式。使用LZMA压缩这样的方式，建议是从第三方主机中进行初始下载的时候，由于其文件比较小。比较合适。而且一旦文件被下载，它将被缓存为LZ4压缩包。</li>
+<li>BuildAssetBundleOptions.UncompressedAssetBundle：未压缩，但是文件比较大，但是加载时间很快</li>
+<li><p>BuildAssetBundleOptions.ChunkBasedCompression：使用LZ4的压缩方法。压缩大小比用LZMA的大，但是使用该AssetBUNdle中其中一个资产的时候，不要求将整个AssetBundle解压。LZ4使用的是基于块的算法。所以可以解压块。<br>友情提示：ChunkBasedCompression的加载时间可以跟未压缩相提并论。</p>
+<h2 id="BuildTarget"><a href="#BuildTarget" class="headerlink" title="BuildTarget"></a>BuildTarget</h2><p>构建的目标平台。没有什么特殊的。看API即可。如果你没有对平台写有关代码，可以使用EditorUserBuildSettings.activeBuildTarget。可以自动的选择你当前所在的平台。<br>然后当你构建的时候你会发现有一个Manifest文件和同名的AssetBUndle<br>。关于AssetBundle。没啥好介绍的。<br><img src="/2017/09/20/Building AssetBundles/1.png" alt="1"><br>看图即可。</p>
+<h2 id="The-Manifest-File"><a href="#The-Manifest-File" class="headerlink" title="The Manifest File"></a>The Manifest File</h2><p>使用CRC去检验是否完整，其中最重点的是Asset里面所包含的东西，和Dependencies所包含的依赖关系</p>
+<p>  ManifestFileVersion: 0<br>  CRC: 2422268106<br>  Hashes:</p>
+<pre><code>AssetFileHash:
+  serializedVersion: 2
+  Hash: 8b6db55a2344f068cf8a9be0a662ba15
+TypeTreeHash:
+  serializedVersion: 2
+  Hash: 37ad974993dbaa77485dd2a0c38f347a
+</code></pre><p>  HashAppended: 0<br>  ClassTypes:</p>
+<ul>
+<li>Class: 91<br>Script: {instanceID: 0}<br>Assets:<br>Asset_0: Assets/Mecanim/StateMachine.controller<br>Dependencies: {}<br>Which shows the contained assets, dependencies, and other information.<br>The Manifest Bundle that was generated will have a manifest, but it’ll look more like this:<br>ManifestFileVersion: 0<br>AssetBundleManifest:<br>AssetBundleInfos:<br>  Info_0:<pre><code>Name: scene1assetbundle
+Dependencies: {}
+</code></pre></li>
+</ul>
+</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -95,7 +118,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2017/04/11/UIToggle/" data-title="UIToggle | Seven_words的博客" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2017/09/20/Building AssetBundles/" data-title="Building AssetBundles（三） | Seven_words的博客" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -104,19 +127,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/04/21/关于lua的总结三/" title="最近关于Lua的学习篇总结（三）">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  最近关于Lua的学习篇总结（三）</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/04/11/UIGrid/"  title="NGUI的UIGrid和UITable的使用">
+<a href="/2017/09/19/2.Preparing Assets for AssetBundles/"  title="2.Preparing Assets for AssetBundles">
  <strong>NEXT:</strong><br/> 
- <span>NGUI的UIGrid和UITable的使用
+ <span>2.Preparing Assets for AssetBundles
 </span>
 </a>
 </div>
@@ -129,7 +144,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#UIToggle"><span class="toc-number">1.</span> <span class="toc-text">UIToggle</span></a></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Building-AssetBundles"><span class="toc-number">1.</span> <span class="toc-text">Building AssetBundles</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BuildAssetBundleOptions"><span class="toc-number">1.1.</span> <span class="toc-text">BuildAssetBundleOptions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BuildTarget"><span class="toc-number">1.2.</span> <span class="toc-text">BuildTarget</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Manifest-File"><span class="toc-number">1.3.</span> <span class="toc-text">The Manifest File</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
