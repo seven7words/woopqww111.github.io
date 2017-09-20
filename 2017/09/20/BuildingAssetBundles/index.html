@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>2.Preparing Assets for AssetBundles | Seven_words的博客</title>
+    <title>Building AssetBundles（三） | Seven_words的博客</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Seven_words/woopqww111">
     
-    <meta name="description" content="Preparing Assets for AssetBundles当使用AssetBundles的时候你可以自由的分配任何资产给你想要的bundle。然而如何去设置你的bundle其实是由策略的。下面的分组策略是有用的，但是你需要去看是否适合你的项目。当然一切看你需求，想咋用这些策略都可以。
-Log">
+    <meta name="description" content="Building AssetBundlesBuildPipeline.BuildAssetBundles这个方法有三个参数。outputPath：这是AssetBundles将输出到的目录，但是必须确保buildAssetBundle的时候，该文件夹必须存在
+BuildAssetBundleOpti">
     
     
     
@@ -66,15 +66,15 @@ Log">
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/09/19/2.Preparing Assets for AssetBundles/" title="2.Preparing Assets for AssetBundles" itemprop="url">2.Preparing Assets for AssetBundles</a>
+      <a href="/2017/09/20/BuildingAssetBundles/" title="Building AssetBundles（三）" itemprop="url">Building AssetBundles（三）</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="Seven_words/woopqww111">Seven_words/woopqww111</a>
     </p>
   <p class="article-time">
-    <time datetime="2017-09-19T08:44:29.000Z" itemprop="datePublished">2017-09-19</time>
-    Updated:<time datetime="2017-09-19T08:46:43.000Z" itemprop="dateModified">2017-09-19</time>
+    <time datetime="2017-09-20T03:30:29.000Z" itemprop="datePublished">2017-09-20</time>
+    Updated:<time datetime="2017-09-20T03:33:36.000Z" itemprop="dateModified">2017-09-20</time>
     
   </p>
 </header>
@@ -83,21 +83,32 @@ Log">
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
-		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Preparing-Assets-for-AssetBundles"><span class="toc-number">1.</span> <span class="toc-text">Preparing Assets for AssetBundles</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logical-Entity-Grouping-逻辑实体分组"><span class="toc-number">1.1.</span> <span class="toc-text">Logical Entity Grouping 逻辑实体分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-Grouping-类型分组"><span class="toc-number">1.2.</span> <span class="toc-text">Type Grouping 类型分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Concurrent-Content-Grouping按照使用分组"><span class="toc-number">1.3.</span> <span class="toc-text">Concurrent Content Grouping按照使用分组</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Building-AssetBundles"><span class="toc-number">1.</span> <span class="toc-text">Building AssetBundles</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BuildAssetBundleOptions"><span class="toc-number">1.1.</span> <span class="toc-text">BuildAssetBundleOptions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BuildTarget"><span class="toc-number">1.2.</span> <span class="toc-text">BuildTarget</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Manifest-File"><span class="toc-number">1.3.</span> <span class="toc-text">The Manifest File</span></a></li></ol></li></ol>
 		</div>
 		
-		<h1 id="Preparing-Assets-for-AssetBundles"><a href="#Preparing-Assets-for-AssetBundles" class="headerlink" title="Preparing Assets for AssetBundles"></a>Preparing Assets for AssetBundles</h1><p>当使用AssetBundles的时候你可以自由的分配任何资产给你想要的bundle。<br>然而如何去设置你的bundle其实是由策略的。下面的分组策略是有用的，但是你需要去看是否适合你的项目。当然一切看你需求，想咋用这些策略都可以。</p>
-<h2 id="Logical-Entity-Grouping-逻辑实体分组"><a href="#Logical-Entity-Grouping-逻辑实体分组" class="headerlink" title="Logical Entity Grouping 逻辑实体分组"></a>Logical Entity Grouping 逻辑实体分组</h2><p>逻辑实体分组通常是基于他们所带便的功能来分配的。他们可以包括的部分有UI，characters，environments和甚至一些贯穿应用中的生命周期里频繁出现的其他部分。</p>
+		<h1 id="Building-AssetBundles"><a href="#Building-AssetBundles" class="headerlink" title="Building AssetBundles"></a>Building AssetBundles</h1><p>BuildPipeline.BuildAssetBundles这个方法有三个参数。<br>outputPath：这是AssetBundles将输出到的目录，但是必须确保buildAssetBundle的时候，该文件夹必须存在</p>
+<h2 id="BuildAssetBundleOptions"><a href="#BuildAssetBundleOptions" class="headerlink" title="BuildAssetBundleOptions"></a>BuildAssetBundleOptions</h2><p>BuildAssetBundleOptions这个选项里有好几个分类，你可以随意指定其中一个。<br>你可以随着你的项目自由的使用该参数，然而这个参数实际上是用来处理AssetBundle的压缩的。</p>
 <ul>
-<li>一个UI界面或者所有UI界面一个包（这个界面里面的贴图和布局信息一个包）</li>
-<li>一个角色或者所有角色一个包（这个角色里面的模型和动画一个包）</li>
-<li>所有的场景所共享的部分一个包（包括贴图和模型）<br>逻辑实体分组是可下载内容（DLC）的理想选择，因为以这种方式分离的所有内容，您可以对单个实体进行更改，而不需要下载额外的未更改Assets。<br>oh。想要实现这个，你需要对准确的了解项目中assets的使用时间和位置才可以将其分配给各自的包<h2 id="Type-Grouping-类型分组"><a href="#Type-Grouping-类型分组" class="headerlink" title="Type Grouping 类型分组"></a>Type Grouping 类型分组</h2>对于此策略，您可以将类似类型的资产（如音轨或语言本地化文件）分配给单个AssetBundle。因为纹理压缩格式和设置的更改频率比您的代码脚本或预制的频率更低。<br>类型分组是构建要由多个平台使用的AssetBundles的做好的策略之一。 例如如果你声音资源在windows和mac平台的压缩设置是相同的，你可以将所有的声音资源的数据打包到AssetBundles中，并且重复使用。然而如果是shader的话，可能在每个平台的指定的选项是不一样的。所以mac上的包是不能在windows上用的。除此之外，这些方法也可以很好的使用来适应unity编辑器的兼容性，因为纹理压缩格式和设置的更改频率比您的代码脚本或预制的频率更低。<br>总结：所有声音资源打成一个包，所有shader打成一个包，所有模型打成一个包，所有材质打成一个包<h2 id="Concurrent-Content-Grouping按照使用分组"><a href="#Concurrent-Content-Grouping按照使用分组" class="headerlink" title="Concurrent Content Grouping按照使用分组"></a>Concurrent Content Grouping按照使用分组</h2>按照使用分组是将同时加载和使用的资产捆绑在一起的方法。您可以将这些类型的包用于基于level的游戏，其中每个级别都包含完全独特的角色，纹理，音乐等。您希望绝对确定其中一个AssetBundles中的资产仅在同一时间将使用该捆绑中的其余资产。对按照使用分组捆绑中的单个资产的依赖将导致显着增加的加载时间。您将被迫下载该单一资产的整个捆绑包。</li>
+<li>BuildAssetBundleOptions.None：这个选项使用的是LZMA压缩算法。如果要使用LZMAde压缩包里的文件，必须将整个包解压。然而这个由于压缩的大小最小，所以解压加载的时间相对来说也最长。一旦该压缩方式的文件被解压，在磁盘中将使用LZ4算法将不需要被使用的AssetBundle重新压缩。这个的最好的使用方式是那种，要把该AssetBUndle里的所有文件都使用的方式。使用LZMA压缩这样的方式，建议是从第三方主机中进行初始下载的时候，由于其文件比较小。比较合适。而且一旦文件被下载，它将被缓存为LZ4压缩包。</li>
+<li>BuildAssetBundleOptions.UncompressedAssetBundle：未压缩，但是文件比较大，但是加载时间很快</li>
+<li><p>BuildAssetBundleOptions.ChunkBasedCompression：使用LZ4的压缩方法。压缩大小比用LZMA的大，但是使用该AssetBUNdle中其中一个资产的时候，不要求将整个AssetBundle解压。LZ4使用的是基于块的算法。所以可以解压块。<br>友情提示：ChunkBasedCompression的加载时间可以跟未压缩相提并论。</p>
+<h2 id="BuildTarget"><a href="#BuildTarget" class="headerlink" title="BuildTarget"></a>BuildTarget</h2><p>构建的目标平台。没有什么特殊的。看API即可。如果你没有对平台写有关代码，可以使用EditorUserBuildSettings.activeBuildTarget。可以自动的选择你当前所在的平台。<br>然后当你构建的时候你会发现有一个Manifest文件和同名的AssetBUndle<br>。关于AssetBundle。没啥好介绍的。<br><img src="/2017/09/20/BuildingAssetBundles/1.png" alt="1"><br>看图即可。</p>
+<h2 id="The-Manifest-File"><a href="#The-Manifest-File" class="headerlink" title="The Manifest File"></a>The Manifest File</h2><p>使用CRC去检验是否完整，其中最重点的是Asset里面所包含的东西，和Dependencies所包含的依赖关系</p>
+<p>  ManifestFileVersion: 0<br>  CRC: 2422268106<br>  Hashes:</p>
+<pre><code>AssetFileHash:
+  serializedVersion: 2
+  Hash: 8b6db55a2344f068cf8a9be0a662ba15
+TypeTreeHash:
+  serializedVersion: 2
+  Hash: 37ad974993dbaa77485dd2a0c38f347a
+</code></pre><p>  HashAppended: 0<br>  ClassTypes:</p>
+<ul>
+<li>Class: 91<br>Script: {instanceID: 0}<br>Assets:<br>Asset_0: Assets/Mecanim/StateMachine.controller<br>Dependencies: {}<br>Which shows the contained assets, dependencies, and other information.<br>The Manifest Bundle that was generated will have a manifest, but it’ll look more like this:<br>ManifestFileVersion: 0<br>AssetBundleManifest:<br>AssetBundleInfos:<br>  Info_0:<pre><code>Name: scene1assetbundle
+Dependencies: {}
+</code></pre></li>
 </ul>
-<p>按照使用分组最常见的用例是基于场景。在此分配策略中，每个场景束应包含大部分或全部场景依赖关系。</p>
-<p>请注意，一个项目绝对可以并且应该根据需要混合这些策略。使用任何给定情景的最优资产分配策略可大大提高任何项目的效率。</p>
-<p>例如，项目可以决定将用于不同平台的用户界面（UI）元素分组到他们自己的Platform-UI特定的捆绑包中，但按照级别/场景对其交互式内容进行分组。</p>
-<p>无论您遵循的策略如何，这里还有一些额外的提示，可以全面铭记于心：</p>
-<p>将经常更新的对象拆分成AssetBundles与很少更改的对象分开<br>组合可能同时加载的对象。如模型，纹理和动画<br>如果您注意到多个AssetBundles中的多个对象取决于完全不同的AssetBundle中的单个资产，请将依赖关系移动到单独的AssetBundle。如果几个AssetBundles引用了其他AssetBundles中的同一组资产，那么可能值得将这些依赖关系引入共享的AssetBundle以减少重复。<br>如果两组对象不太可能同时加载，例如标准和高清资产，请确保它们在自己的资产组合中。<br>考虑拆分AssetBundle，如果少于该捆绑的50％在同一时间经常加载<br>考虑组合资产小数（少于5到10个资产），但其内容经常同时加载<br>如果一组对象是同一对象的简单不同版本，请考虑AssetBundle的后缀</p>
+</li>
+</ul>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -107,7 +118,7 @@ Log">
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2017/09/19/2.Preparing Assets for AssetBundles/" data-title="2.Preparing Assets for AssetBundles | Seven_words的博客" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2017/09/20/BuildingAssetBundles/" data-title="Building AssetBundles（三） | Seven_words的博客" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -116,19 +127,11 @@ Log">
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2017/09/20/BuildingAssetBundles/" title="Building AssetBundles（三）">
-  <strong>PREVIOUS:</strong><br/>
-  <span>
-  Building AssetBundles（三）</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/09/19/1.AssetBundle Workflow/"  title="AssetBundle Workflow (一)">
+<a href="/2017/09/19/2.Preparing Assets for AssetBundles/"  title="2.Preparing Assets for AssetBundles">
  <strong>NEXT:</strong><br/> 
- <span>AssetBundle Workflow (一)
+ <span>2.Preparing Assets for AssetBundles
 </span>
 </a>
 </div>
@@ -141,7 +144,7 @@ Log">
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">Contents</strong>
-  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Preparing-Assets-for-AssetBundles"><span class="toc-number">1.</span> <span class="toc-text">Preparing Assets for AssetBundles</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Logical-Entity-Grouping-逻辑实体分组"><span class="toc-number">1.1.</span> <span class="toc-text">Logical Entity Grouping 逻辑实体分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Type-Grouping-类型分组"><span class="toc-number">1.2.</span> <span class="toc-text">Type Grouping 类型分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Concurrent-Content-Grouping按照使用分组"><span class="toc-number">1.3.</span> <span class="toc-text">Concurrent Content Grouping按照使用分组</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Building-AssetBundles"><span class="toc-number">1.</span> <span class="toc-text">Building AssetBundles</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#BuildAssetBundleOptions"><span class="toc-number">1.1.</span> <span class="toc-text">BuildAssetBundleOptions</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BuildTarget"><span class="toc-number">1.2.</span> <span class="toc-text">BuildTarget</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Manifest-File"><span class="toc-number">1.3.</span> <span class="toc-text">The Manifest File</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
